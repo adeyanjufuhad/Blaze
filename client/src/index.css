@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  background-color: #fffaf5;
+  color: #1a0a00;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Custom sleek warm scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #fffaf5;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #e8ded2;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ff4500;
+}
+
+/* Blaze custom warm shadows & text styles */
+.blaze-card-shadow {
+  box-shadow: 0 2px 20px rgba(255, 69, 0, 0.08);
+}
+
+.blaze-card-shadow-hover {
+  box-shadow: 0 8px 30px rgba(255, 69, 0, 0.14);
+}
+
+.blaze-glow {
+  box-shadow: 0 0 25px rgba(255, 69, 0, 0.25);
+}
+
+.blaze-glow-sm {
+  box-shadow: 0 0 15px rgba(255, 69, 0, 0.18);
+}
+
+/* Warm Noise overlay utility */
+.bg-noise {
+  background-image: radial-gradient(rgba(26, 10, 0, 0.03) 1px, transparent 0);
+  background-size: 24px 24px;
+}
