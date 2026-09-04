@@ -7,50 +7,50 @@
 }
 
 body {
-  background-color: #fffaf5;
-  color: #1a0a00;
+  background-color: #faf9f6;
+  color: #111111;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   overflow-x: hidden;
 }
 
-/* Custom sleek warm scrollbar */
+h1, h2, h3, h4, .font-serif {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+/* Oriente elegant subtle scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #fffaf5;
+  background: #faf9f6;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #e8ded2;
-  border-radius: 4px;
+  background: #ded9d0;
+  border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #ff4500;
+  background: #111111;
 }
 
-/* Blaze custom warm shadows & text styles */
-.blaze-card-shadow {
-  box-shadow: 0 2px 20px rgba(255, 69, 0, 0.08);
+/* Oriente minimalist card border styling */
+.oriente-border {
+  border-color: #e8e4dd;
 }
 
-.blaze-card-shadow-hover {
-  box-shadow: 0 8px 30px rgba(255, 69, 0, 0.14);
+/* Subtle image-only hover utility */
+.oriente-img-hover {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.oriente-img-hover:hover {
+  transform: scale(1.02);
 }
 
-.blaze-glow {
-  box-shadow: 0 0 25px rgba(255, 69, 0, 0.25);
-}
-
-.blaze-glow-sm {
-  box-shadow: 0 0 15px rgba(255, 69, 0, 0.18);
-}
-
-/* Warm Noise overlay utility */
+/* Subtle noise background */
 .bg-noise {
-  background-image: radial-gradient(rgba(26, 10, 0, 0.03) 1px, transparent 0);
+  background-image: radial-gradient(rgba(17, 17, 17, 0.02) 1px, transparent 0);
   background-size: 24px 24px;
 }

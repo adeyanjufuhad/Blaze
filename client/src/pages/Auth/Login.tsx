@@ -53,22 +53,22 @@ export const Login: React.FC = () => {
   };
 
   return (
-    <div className="min-h-[85vh] flex items-center justify-center bg-[#fffaf5] px-4 py-16">
-      <div className="max-w-md w-full rounded-3xl border border-[#f0e6d9] bg-white p-8 sm:p-10 shadow-blaze-card space-y-6">
+    <div className="min-h-[85vh] flex items-center justify-center bg-[#faf9f6] px-4 py-16">
+      <div className="max-w-md w-full rounded-3xl border border-[#e8e4dd] bg-white p-8 sm:p-10 shadow-xs space-y-6">
         <div className="text-center space-y-2">
           <div className="flex justify-center mb-4">
             <Logo size="md" isLink={false} darkText={true} />
           </div>
-          <h1 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-[#1a0a00]">
+          <h1 className="font-serif text-2xl sm:text-3xl font-normal tracking-tight text-[#111111]">
             Welcome Back
           </h1>
-          <p className="text-xs text-[#8a6a50]">
+          <p className="text-xs text-[#666666]">
             Log in to your account to order and track your delivery.
           </p>
         </div>
 
         {errorMessage && (
-          <div className="p-3.5 rounded-xl bg-red-50 border border-red-200 flex items-start gap-2.5 text-xs text-red-600">
+          <div className="p-3 rounded-xl bg-red-50 border border-red-200 flex items-start gap-2.5 text-xs text-red-600">
             <AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
             <span>{errorMessage}</span>
           </div>
@@ -76,11 +76,11 @@ export const Login: React.FC = () => {
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-xs font-bold uppercase tracking-wider text-[#8a6a50] mb-1.5">
+            <label className="block text-xs font-medium tracking-wide text-[#666666] mb-1.5">
               Email Address
             </label>
             <div className="relative">
-              <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8a6a50]" />
+              <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#888888]" />
               <input
                 type="email"
                 name="email"
@@ -88,25 +88,25 @@ export const Login: React.FC = () => {
                 placeholder="alex@blaze.com"
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full bg-[#fffaf5] border border-[#f0e6d9] focus:border-[#ff4500] rounded-xl pl-10 pr-4 py-3 text-sm text-[#1a0a00] placeholder-[#8a6a50]/60 focus:outline-none transition-colors"
+                className="w-full bg-[#faf9f6] border border-[#e8e4dd] focus:border-[#111111] rounded-xl pl-10 pr-4 py-2.5 text-xs text-[#111111] placeholder-[#888888] focus:outline-none transition-colors"
               />
             </div>
           </div>
 
           <div>
             <div className="flex items-center justify-between mb-1.5">
-              <label className="text-xs font-bold uppercase tracking-wider text-[#8a6a50]">
+              <label className="text-xs font-medium tracking-wide text-[#666666]">
                 Password
               </label>
               <Link
                 to="/auth/forgot-password"
-                className="text-[11px] font-bold text-[#8a6a50] hover:text-[#ff4500] transition-colors"
+                className="text-[11px] text-[#666666] hover:text-[#111111] transition-colors"
               >
                 Forgot password?
               </Link>
             </div>
             <div className="relative">
-              <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8a6a50]" />
+              <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#888888]" />
               <input
                 type="password"
                 name="password"
@@ -114,7 +114,7 @@ export const Login: React.FC = () => {
                 placeholder="••••••••"
                 value={formData.password}
                 onChange={handleChange}
-                className="w-full bg-[#fffaf5] border border-[#f0e6d9] focus:border-[#ff4500] rounded-xl pl-10 pr-4 py-3 text-sm text-[#1a0a00] placeholder-[#8a6a50]/60 focus:outline-none transition-colors"
+                className="w-full bg-[#faf9f6] border border-[#e8e4dd] focus:border-[#111111] rounded-xl pl-10 pr-4 py-2.5 text-xs text-[#111111] placeholder-[#888888] focus:outline-none transition-colors"
               />
             </div>
           </div>
@@ -122,18 +122,18 @@ export const Login: React.FC = () => {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full flex items-center justify-center gap-2 py-4 rounded-xl bg-[#ff4500] hover:bg-[#e03800] text-white font-black uppercase text-xs tracking-wider transition-all duration-200 shadow-xl shadow-[#ff4500]/30 active:scale-95 disabled:opacity-50 cursor-pointer"
+            className="w-full flex items-center justify-center gap-2 py-3 rounded-full bg-[#111111] hover:bg-[#2d5a27] text-white font-medium text-xs tracking-wide transition-colors cursor-pointer disabled:opacity-50"
           >
             {isSubmitting ? <span>Logging In...</span> : <span>Log In</span>}
-            <ArrowRight className="w-4 h-4" />
+            <ArrowRight className="w-3.5 h-3.5" />
           </button>
         </form>
 
-        <div className="text-center pt-4 border-t border-[#f0e6d9] text-xs text-[#8a6a50]">
+        <div className="text-center pt-4 border-t border-[#e8e4dd] text-xs text-[#666666]">
           Don't have an account yet?{' '}
           <Link
             to="/auth/register"
-            className="text-[#ff4500] font-black uppercase hover:underline ml-1"
+            className="text-[#111111] font-medium hover:underline ml-1"
           >
             Sign Up
           </Link>

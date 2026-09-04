@@ -51,19 +51,19 @@ export const ToastContainer: React.FC = () => {
     switch (type) {
       case 'success':
         return {
-          icon: <CheckCircle2 className="w-5 h-5 text-emerald-400 flex-shrink-0" />,
-          border: 'border-emerald-500/40 bg-[#121f17] text-white',
+          icon: <CheckCircle2 className="w-4 h-4 text-[#2d5a27] flex-shrink-0" />,
+          border: 'border-[#e8e4dd] bg-white text-[#111111]',
         };
       case 'error':
         return {
-          icon: <AlertCircle className="w-5 h-5 text-red-400 flex-shrink-0" />,
-          border: 'border-red-500/40 bg-[#241212] text-white',
+          icon: <AlertCircle className="w-4 h-4 text-red-600 flex-shrink-0" />,
+          border: 'border-red-200 bg-white text-red-700',
         };
       case 'info':
       default:
         return {
-          icon: <Info className="w-5 h-5 text-[#ff4500] flex-shrink-0" />,
-          border: 'border-[#ff4500]/40 bg-[#1e1410] text-white',
+          icon: <Info className="w-4 h-4 text-[#111111] flex-shrink-0" />,
+          border: 'border-[#e8e4dd] bg-white text-[#111111]',
         };
     }
   };
@@ -80,19 +80,19 @@ export const ToastContainer: React.FC = () => {
               animate={{ opacity: 1, x: 0, scale: 1 }}
               exit={{ opacity: 0, x: 50, scale: 0.9 }}
               transition={{ type: 'spring', damping: 25, stiffness: 350 }}
-              className={`pointer-events-auto flex items-center justify-between gap-3 px-4 py-3.5 rounded-xl border shadow-2xl backdrop-blur-md ${border}`}
+              className={`pointer-events-auto flex items-center justify-between gap-3 px-4 py-3 rounded-2xl border shadow-lg ${border}`}
             >
               <div className="flex items-center gap-3">
                 {icon}
-                <span className="text-sm font-medium leading-snug">{item.message}</span>
+                <span className="text-xs font-medium leading-snug">{item.message}</span>
               </div>
               <button
                 type="button"
                 onClick={() => removeToast(item.id)}
-                className="text-neutral-400 hover:text-white p-1 transition-colors"
+                className="text-[#888888] hover:text-[#111111] p-1 transition-colors cursor-pointer"
                 aria-label="Dismiss toast"
               >
-                <X className="w-4 h-4" />
+                <X className="w-3.5 h-3.5" />
               </button>
             </motion.div>
           );

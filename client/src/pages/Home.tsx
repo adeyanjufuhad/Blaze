@@ -1,31 +1,39 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowUpRight, Flame, Clock, Sparkles, ShieldCheck, ChevronRight } from 'lucide-react';
-import { Marquee } from '../components/ui/Marquee';
+import { ArrowDown, ArrowUpRight } from 'lucide-react';
 import { PizzaCard } from '../components/ui/PizzaCard';
 import { PizzaCardSkeleton } from '../components/ui/Skeleton';
+import { MarqueeProductSection } from '../components/ui/MarqueeProductSection';
+import { Marquee } from '../components/ui/Marquee';
 import { Pizza } from '../types';
 import api from '../lib/api';
 
+const CATEGORIES = ['All', 'Specials', 'Classic', 'Chicken', 'Veggie'];
+
 export const Home: React.FC = () => {
   const [featuredPizzas, setFeaturedPizzas] = useState<Pizza[]>([]);
+  const [allPizzas, setAllPizzas] = useState<Pizza[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState('All');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchFeatured = async () => {
+    const fetchPizzas = async () => {
       try {
         const res = await api.get('/api/pizza?all=false');
-        if (res.data?.pizzas) {
+        if (res.data?.pizzas && res.data.pizzas.length > 0) {
+          setAllPizzas(res.data.pizzas);
           setFeaturedPizzas(res.data.pizzas.slice(0, 4));
+        } else {
+          throw new Error('No pizzas returned');
         }
       } catch (err) {
-        console.warn('Using fallback featured pizzas:', err);
-        setFeaturedPizzas([
+        console.warn('Using fallback pizzas:', err);
+        const fallback: Pizza[] = [
           {
             _id: '1',
-            name: 'The Blaze Special',
-            description: 'Fire-roasted smoked chicken, double spicy pepperoni, scotch bonnet marinara & hot honey drizzle.',
+            name: 'Smoky Truffle Delight',
+            description: 'Fire-roasted smoked chicken, wild forest mushrooms, buffalo mozzarella & black truffle oil.',
             basePrice: 7500,
             image: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=1000&q=80',
             category: 'Specials',
@@ -54,271 +62,275 @@ export const Home: React.FC = () => {
           },
           {
             _id: '4',
-            name: 'Veggie Feast',
-            description: 'Earthy button mushrooms, sweet crisp bell peppers, Kalamata olives, sweet corn & baby spinach.',
+            name: 'Mediterranean Veggie',
+            description: 'Earthy button mushrooms, sweet bell peppers, Kalamata olives, sweet corn & baby spinach.',
             basePrice: 5800,
             image: 'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=1000&q=80',
             category: 'Veggie',
             badge: 'New',
             isAvailable: true,
           },
-        ]);
+          {
+            _id: '5',
+            name: 'Quattro Formaggi',
+            description: 'Aged parmesan, creamy gorgonzola, fresh ricotta and fior di latte mozzarella.',
+            basePrice: 7200,
+            image: 'https://images.unsplash.com/photo-1573821663912-569905455b1a?auto=format&fit=crop&w=1000&q=80',
+            category: 'Classic',
+            badge: 'Popular',
+            isAvailable: true,
+          },
+          {
+            _id: '6',
+            name: 'Spicy Diavola',
+            description: 'Spicy Calabrian salami, fresh chili flakes, San Marzano sauce and melted provolone.',
+            basePrice: 6900,
+            image: 'https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?auto=format&fit=crop&w=1000&q=80',
+            category: 'Specials',
+            badge: 'Spicy',
+            isAvailable: true,
+          },
+        ];
+        setAllPizzas(fallback);
+        setFeaturedPizzas(fallback.slice(0, 4));
       } finally {
         setLoading(false);
       }
     };
 
-    fetchFeatured();
+    fetchPizzas();
   }, []);
 
+  const filteredPizzas =
+    selectedCategory === 'All'
+      ? allPizzas
+      : allPizzas.filter((p) => p.category.toLowerCase() === selectedCategory.toLowerCase());
+
+  const scrollToMenu = () => {
+    const el = document.getElementById('menu-section');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <div className="flex flex-col min-h-screen bg-[#fffaf5] text-[#1a0a00] overflow-hidden">
-      {/* 1. HERO SECTION (Warm Light Theme with Radial Gradient) */}
-      <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden border-b border-[#f0e6d9] bg-[#fffaf5]">
-        {/* Subtle warm radial gradient behind hero text */}
-        <div
-          className="absolute inset-0 z-0 pointer-events-none"
-          style={{
-            background: 'radial-gradient(circle at 50% 45%, #fff0e6 0%, #fffaf5 70%)',
-          }}
-        />
+    <div className="flex flex-col min-h-screen bg-[#faf9f6] text-[#111111] overflow-hidden">
+      {/* 1. HERO SECTION (Editorial Serif, split layout with large food photo) */}
+      <section className="relative min-h-[82vh] flex items-center bg-[#faf9f6] border-b border-[#e8e4dd] py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+            {/* Left Editorial Content */}
+            <div className="lg:col-span-7 space-y-6">
+              {/* Pill badge */}
+              <div className="inline-flex items-center gap-2 rounded-full bg-[#111111] px-4 py-1 text-xs font-medium text-[#faf9f6]">
+                <span>🔥 Freshly baked · Wood-fired crusts</span>
+              </div>
 
-        {/* Hero Content */}
-        <div className="relative z-10 mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-20 text-center">
-          {/* Pill badge: warm border + orange-red text on light background */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 rounded-full border border-[#f0e6d9] bg-white px-4 py-1.5 text-xs font-black uppercase tracking-widest text-[#ff4500] shadow-[0_2px_12px_rgba(255,69,0,0.1)] mb-8"
-          >
-            <Flame className="w-4 h-4 fill-[#ff4500]" />
-            <span>CAMPUS FRESH · WOOD-FIRED ARTISANAL CRUSTS</span>
-          </motion.div>
+              {/* Editorial Headline: Playfair Display serif with mid-sentence break */}
+              <h1 className="font-serif text-5xl sm:text-7xl lg:text-8xl font-normal leading-[1.05] tracking-tight text-[#111111]">
+                Blazing Hot Pizza,
+                <br />
+                <span className="italic font-normal">Made for the late-night grind.</span>
+              </h1>
 
-          {/* Large Bold Oversized Typography: "PIZZA THAT" in #1a0a00, "HITS DIFFERENT" in #ff4500 */}
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black uppercase tracking-tighter leading-none mb-6 select-none"
-            style={{ letterSpacing: '-0.06em' }}
-          >
-            <span className="text-[#1a0a00]">PIZZA THAT</span>
-            <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff4500] via-[#ff6b35] to-[#ff4500]">
-              HITS DIFFERENT.
-            </span>
-          </motion.h1>
+              {/* Subtext */}
+              <p className="max-w-xl text-base sm:text-lg text-[#666666] leading-relaxed font-light">
+                Wood-fired artisanal pizzas baked with patience and passion. Hand-stretched dough, San Marzano tomatoes, and whole-milk mozzarella delivered fresh.
+              </p>
 
-          {/* Subtext in warm brown-gray #8a6a50 */}
-          <motion.p
-            initial={{ opacity: 0, y: 25 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="mx-auto max-w-xl text-lg sm:text-xl text-[#8a6a50] font-medium leading-relaxed mb-10"
-          >
-            Built for the bold. Delivered to your door. Hand-tossed dough, bubbling whole-milk mozzarella, and signature fire seasonings.
-          </motion.p>
+              {/* CTAs */}
+              <div className="pt-4 flex flex-wrap items-center gap-5">
+                <Link
+                  to="/menu"
+                  className="inline-flex items-center justify-center rounded-full bg-[#111111] hover:bg-[#2d5a27] px-8 py-3.5 text-xs font-medium text-white transition-colors"
+                >
+                  Order Now
+                </Link>
 
-          {/* Two CTAs */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.3 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
-          >
-            <Link
-              to="/menu"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-2xl bg-[#ff4500] px-8 py-4 text-sm font-black uppercase tracking-wider text-white shadow-xl shadow-[#ff4500]/30 hover:bg-[#e03800] hover:shadow-[#ff4500]/50 active:scale-95 transition-all cursor-pointer"
-            >
-              <span>Order Now</span>
-              <ArrowUpRight className="w-4 h-4 stroke-[3]" />
-            </Link>
+                <button
+                  type="button"
+                  onClick={scrollToMenu}
+                  className="inline-flex items-center gap-2 text-xs font-medium text-[#111111] hover:opacity-70 transition-opacity cursor-pointer px-3 py-2"
+                >
+                  <span>View Menu</span>
+                  <ArrowDown className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            </div>
 
-            <Link
-              to="/build"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-2xl border-2 border-[#1a0a00] bg-white px-8 py-4 text-sm font-black uppercase tracking-wider text-[#1a0a00] hover:bg-[#fff5f0] hover:border-[#ff4500] active:scale-95 transition-all cursor-pointer shadow-sm"
-            >
-              <span>Build Your Own</span>
-              <ChevronRight className="w-4 h-4" />
-            </Link>
-          </motion.div>
+            {/* Right Food Photo */}
+            <div className="lg:col-span-5 relative flex justify-center">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8 }}
+                className="relative w-full max-w-md aspect-square overflow-hidden rounded-3xl bg-[#f5f2ed] border border-[#e8e4dd] shadow-[0_15px_40px_rgba(0,0,0,0.06)]"
+              >
+                <img
+                  src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=1000&q=80"
+                  alt="Artisanal Wood-Fired Pizza"
+                  className="h-full w-full object-cover oriente-img-hover"
+                />
+              </motion.div>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* 2. HORIZONTAL MARQUEE TICKER (Orange-Red Strip #ff4500 with White Text) */}
-      <Marquee
-        items={[
-          'BLAZING HOT',
-          'FRESH TO YOUR DOOR',
-          'ORDER NOW',
-          'CUSTOM BUILT',
-          'DELIVERED FAST',
-          'BLAZE',
-        ]}
-        speed="fast"
-        direction="left"
-        gap="lg"
-      />
+      {/* 2. SIGNATURE PRODUCT MARQUEE SECTION #1 (Oriente's Key Signature Feature) */}
+      {featuredPizzas.length > 0 && (
+        <MarqueeProductSection
+          pizza={featuredPizzas[0]}
+          tagline="Chef's Signature Selection"
+        />
+      )}
 
-      {/* 3. FEATURED PIZZAS GRID (White cards with warm borders) */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl w-full">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
-          <div>
-            <span className="text-xs font-black uppercase tracking-widest text-[#ff4500]">
-              Signature Selection
-            </span>
-            <h2 className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-[#1a0a00] mt-1">
-              Featured Pizzas
-            </h2>
+      {/* 3. MENU / PRODUCT GRID */}
+      <section id="menu-section" className="py-24 px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl w-full">
+        <div className="text-center max-w-2xl mx-auto mb-12 space-y-2">
+          <h2 className="font-serif text-4xl sm:text-5xl text-[#111111] font-normal tracking-tight">
+            Our Pizzas
+          </h2>
+          <p className="text-sm text-[#666666]">
+            Freshly baked · Wood-fired crusts · Real ingredients
+          </p>
+
+          {/* Category Filter Tabs */}
+          <div className="pt-6 flex flex-wrap justify-center gap-2">
+            {CATEGORIES.map((cat) => {
+              const isSelected = selectedCategory === cat;
+              return (
+                <button
+                  key={cat}
+                  type="button"
+                  onClick={() => setSelectedCategory(cat)}
+                  className={`px-5 py-2 rounded-full text-xs font-medium transition-colors cursor-pointer ${
+                    isSelected
+                      ? 'bg-[#111111] text-[#faf9f6]'
+                      : 'bg-transparent text-[#666666] border border-[#e8e4dd] hover:border-[#111111] hover:text-[#111111]'
+                  }`}
+                >
+                  {cat}
+                </button>
+              );
+            })}
           </div>
-
-          <Link
-            to="/menu"
-            className="inline-flex items-center gap-2 text-xs font-black uppercase tracking-wider text-[#ff4500] hover:text-[#e03800] transition-colors"
-          >
-            <span>Explore Full Menu</span>
-            <ArrowUpRight className="w-4 h-4 stroke-[2.5]" />
-          </Link>
         </div>
 
+        {/* 3-Column / 4-Column Product Grid */}
         {loading ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <PizzaCardSkeleton />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             <PizzaCardSkeleton />
             <PizzaCardSkeleton />
             <PizzaCardSkeleton />
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {featuredPizzas.map((pizza) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredPizzas.map((pizza) => (
               <PizzaCard key={pizza._id} pizza={pizza} />
             ))}
           </div>
         )}
-      </section>
-
-      {/* 4. CUSTOM PIZZA BUILDER CTA SECTION (Deep Warm Black #1a0a00 Contrast Section) */}
-      <section className="relative mx-4 sm:mx-8 lg:mx-auto max-w-7xl my-8 rounded-3xl overflow-hidden border border-[#2d1a10] bg-[#1a0a00] p-8 sm:p-14 lg:p-20 shadow-2xl text-white">
-        {/* Background Warm Glow */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-[#ff4500]/20 blur-[120px] rounded-full pointer-events-none" />
-
-        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-          <div className="lg:col-span-7 space-y-6">
-            <div className="inline-flex items-center gap-2 rounded-lg bg-[#ff4500]/20 px-3 py-1 text-xs font-black uppercase tracking-wider text-[#ff6b35]">
-              <Sparkles className="w-3.5 h-3.5" />
-              <span>Your Kitchen, Your Rules</span>
-            </div>
-
-            <h2 className="text-4xl sm:text-6xl font-black uppercase tracking-tight text-white leading-tight">
-              Build Your Dream <br />
-              <span className="text-[#ff4500]">Artisanal Pizza</span>
-            </h2>
-
-            <p className="text-base sm:text-lg text-neutral-300 leading-relaxed max-w-xl">
-              From hand-tossed Roman crusts to smoky mesquite glazes and flame-roasted toppings. Craft your own masterpiece in 4 simple steps and watch it come alive in real-time.
-            </p>
-
-            <div className="pt-2">
-              <Link
-                to="/build"
-                className="inline-flex items-center gap-3 rounded-2xl bg-[#ff4500] px-8 py-4 text-sm font-black uppercase tracking-wider text-white shadow-xl shadow-[#ff4500]/30 hover:bg-[#e03800] hover:shadow-[#ff4500]/50 transition-all active:scale-95"
-              >
-                <span>Build Your Pizza</span>
-                <ArrowUpRight className="w-4 h-4 stroke-[3]" />
-              </Link>
-            </div>
-          </div>
-
-          <div className="lg:col-span-5 relative flex justify-center">
-            <div className="relative w-72 h-72 sm:w-88 sm:h-88 rounded-full border-2 border-dashed border-[#ff4500]/40 p-4 animate-spin-slow">
-              <img
-                src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80"
-                alt="Custom Pizza Builder"
-                className="w-full h-full object-cover rounded-full shadow-2xl shadow-black/80"
-              />
-            </div>
-          </div>
+        {/* View Full Menu Link */}
+        <div className="mt-14 text-center">
+          <Link
+            to="/menu"
+            className="inline-flex items-center gap-2 text-xs font-medium tracking-wide uppercase text-[#111111] hover:opacity-60 transition-opacity border-b border-[#111111] pb-1"
+          >
+            <span>Explore All Pizzas & Custom Options</span>
+            <ArrowUpRight className="w-3.5 h-3.5 stroke-[2]" />
+          </Link>
         </div>
       </section>
 
-      {/* 5. HOW IT WORKS (White cards with warm border #f0e6d9) */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl w-full">
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="text-xs font-black uppercase tracking-widest text-[#ff4500]">
-            Fast & Loud
-          </span>
-          <h2 className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-[#1a0a00] mt-1">
-            How Blaze Works
-          </h2>
-        </div>
+      {/* 4. SIGNATURE PRODUCT MARQUEE SECTION #2 */}
+      {featuredPizzas.length > 1 && (
+        <MarqueeProductSection
+          pizza={featuredPizzas[1]}
+          tagline="The Late-Night Crowd Favorite"
+          reverseMarquee={true}
+        />
+      )}
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Step 1 */}
-          <div className="flex flex-col items-center text-center p-8 rounded-2xl border border-[#f0e6d9] bg-white shadow-sm hover:border-[#ff4500]/40 hover:shadow-md transition-all">
-            <div className="w-16 h-16 rounded-2xl bg-[#fffaf5] border border-[#f0e6d9] flex items-center justify-center text-[#ff4500] mb-6 shadow-xs">
-              <Flame className="w-8 h-8" />
-            </div>
-            <span className="text-[11px] font-black tracking-widest text-[#ff4500] uppercase mb-2">
-              Step 01
-            </span>
-            <h3 className="text-xl font-black uppercase tracking-tight text-[#1a0a00] mb-3">
-              Choose or Build
+      {/* 5. HOW IT WORKS / BRAND STORY STRIP */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl w-full border-t border-[#e8e4dd]">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          {/* Item 1 */}
+          <div className="space-y-3">
+            <span className="text-xs font-medium text-[#888888]">01 /</span>
+            <h3 className="font-serif text-2xl text-[#111111] font-normal">
+              Choose your crust
             </h3>
-            <p className="text-sm text-[#8a6a50] leading-relaxed">
-              Pick from our legendary chef-curated signature pizzas or customize your own crust, sauce, cheese & veggies.
+            <p className="text-xs text-[#666666] leading-relaxed">
+              Hand-stretched Roman style or natural sourdough crust, slow-fermented for 48 hours for crisp, airy perfection.
             </p>
           </div>
 
-          {/* Step 2 */}
-          <div className="flex flex-col items-center text-center p-8 rounded-2xl border border-[#f0e6d9] bg-white shadow-sm hover:border-[#ff4500]/40 hover:shadow-md transition-all">
-            <div className="w-16 h-16 rounded-2xl bg-[#fffaf5] border border-[#f0e6d9] flex items-center justify-center text-[#ff4500] mb-6 shadow-xs">
-              <ShieldCheck className="w-8 h-8" />
-            </div>
-            <span className="text-[11px] font-black tracking-widest text-[#ff4500] uppercase mb-2">
-              Step 02
-            </span>
-            <h3 className="text-xl font-black uppercase tracking-tight text-[#1a0a00] mb-3">
-              Instant Payment
+          {/* Item 2 */}
+          <div className="space-y-3">
+            <span className="text-xs font-medium text-[#888888]">02 /</span>
+            <h3 className="font-serif text-2xl text-[#111111] font-normal">
+              Fresh toppings only
             </h3>
-            <p className="text-sm text-[#8a6a50] leading-relaxed">
-              Pay smoothly with Razorpay. Secure test card verification with automated stock checking and instant confirmation.
+            <p className="text-xs text-[#666666] leading-relaxed">
+              San Marzano tomato marinara, whole-milk fior di latte mozzarella, and flame-roasted artisan proteins.
             </p>
           </div>
 
-          {/* Step 3 */}
-          <div className="flex flex-col items-center text-center p-8 rounded-2xl border border-[#f0e6d9] bg-white shadow-sm hover:border-[#ff4500]/40 hover:shadow-md transition-all">
-            <div className="w-16 h-16 rounded-2xl bg-[#fffaf5] border border-[#f0e6d9] flex items-center justify-center text-[#ff4500] mb-6 shadow-xs">
-              <Clock className="w-8 h-8" />
-            </div>
-            <span className="text-[11px] font-black tracking-widest text-[#ff4500] uppercase mb-2">
-              Step 03
-            </span>
-            <h3 className="text-xl font-black uppercase tracking-tight text-[#1a0a00] mb-3">
-              Real-Time Tracking
+          {/* Item 3 */}
+          <div className="space-y-3">
+            <span className="text-xs font-medium text-[#888888]">03 /</span>
+            <h3 className="font-serif text-2xl text-[#111111] font-normal">
+              At your door in 30
             </h3>
-            <p className="text-sm text-[#8a6a50] leading-relaxed">
-              Follow your order live via WebSockets as it moves from oven baking to packaging and arrival at your door.
+            <p className="text-xs text-[#666666] leading-relaxed">
+              Straight from our wood-fired oven into insulated carriers. Delivered steaming hot to your campus room or office.
             </p>
           </div>
         </div>
       </section>
 
-      {/* 6. SECOND MARQUEE (Contrast Dark Strip #1a0a00 with #fffaf5 Text) */}
+      {/* 6. CATERING / EXPERIENCE SECTION (Full-bleed #f0ece4 background) */}
+      <section className="bg-[#f0ece4] py-20 px-4 sm:px-6 lg:px-8 border-y border-[#e8e4dd]">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+            <div className="md:col-span-7">
+              <h2 className="font-serif text-3xl sm:text-5xl text-[#111111] font-normal tracking-tight leading-tight">
+                Craft your perfect
+                <br />
+                <span className="italic">pizza experience.</span>
+              </h2>
+            </div>
+            <div className="md:col-span-5 space-y-4">
+              <p className="text-xs sm:text-sm text-[#666666] leading-relaxed">
+                Whether you're hosting a late-night study session, campus event, or simply craving something bespoke, our 4-step custom crust builder lets you compose every layer.
+              </p>
+              <div>
+                <Link
+                  to="/build"
+                  className="inline-flex items-center gap-2 text-xs font-medium text-[#111111] hover:text-[#2d5a27] transition-colors border-b border-[#111111] pb-0.5"
+                >
+                  <span>Build Your Own →</span>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 7. FAST FRESH MARQUEE STRIP (Black #111111 with cream text) */}
       <Marquee
         items={[
-          'CHEF SPECIALS',
-          'DOUBLE SMOKED CHICKEN',
-          'SAN MARZANO MARINARA',
-          'SPICY SCOTCH BONNET',
-          'TRIPLE CHEESE MELT',
-          'BLAZE PIZZA',
+          'WOOD-FIRED CRUSTS',
+          'REAL MOZZARELLA',
+          'FAST CAMPUS DELIVERY',
+          'OPEN LATE TILL 2 AM',
+          'HAND-STRETCHED DOUGH',
+          'SAN MARZANO SAUCE',
         ]}
-        speed="slow"
-        direction="right"
-        gap="md"
-        className="bg-[#1a0a00] border-y border-[#2d1808]"
+        speed="normal"
+        direction="left"
+        gap="lg"
       />
     </div>
   );

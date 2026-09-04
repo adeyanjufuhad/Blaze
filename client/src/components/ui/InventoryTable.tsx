@@ -45,10 +45,10 @@ export const InventoryTable: React.FC<InventoryTableProps> = ({
   };
 
   return (
-    <div className="w-full overflow-x-auto rounded-2xl border border-[#f0e6d9] bg-white shadow-blaze-card">
+    <div className="w-full overflow-x-auto rounded-2xl border border-[#e8e4dd] bg-white shadow-xs">
       <table className="w-full text-left border-collapse text-sm">
         <thead>
-          <tr className="border-b border-[#f0e6d9] bg-[#fffaf5] text-[11px] font-black uppercase tracking-wider text-[#8a6a50]">
+          <tr className="border-b border-[#e8e4dd] bg-[#faf9f6] text-[11px] font-medium uppercase tracking-wider text-[#666666]">
             <th className="py-4 px-5">Item Name</th>
             <th className="py-4 px-5">Type</th>
             <th className="py-4 px-5">Current Stock</th>
@@ -58,14 +58,14 @@ export const InventoryTable: React.FC<InventoryTableProps> = ({
             <th className="py-4 px-5 text-right">Actions</th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-[#f0e6d9] font-medium">
+        <tbody className="divide-y divide-[#e8e4dd] font-medium">
           {items.map((item) => {
             const isEditing = editingId === item._id;
             const isSaving = savingId === item._id;
             const isLow = item.stock <= item.threshold;
             const isCritical = item.stock <= Math.floor(item.threshold / 2);
 
-            let rowBg = 'hover:bg-[#fffaf5]';
+            let rowBg = 'hover:bg-[#faf9f6]';
             if (isCritical) {
               rowBg = 'bg-red-50/80 hover:bg-red-100/60';
             } else if (isLow) {
@@ -78,15 +78,15 @@ export const InventoryTable: React.FC<InventoryTableProps> = ({
                 <td className="py-4 px-5">
                   <div className="flex items-center gap-2">
                     {isCritical && <AlertTriangle className="w-4 h-4 text-red-500 flex-shrink-0" />}
-                    <span className="font-bold text-[#1a0a00] uppercase tracking-tight">
+                    <span className="font-semibold text-[#111111] tracking-tight">
                       {item.name}
                     </span>
                   </div>
                 </td>
 
                 {/* Type */}
-                <td className="py-4 px-5 text-[#8a6a50] capitalize">
-                  <span className="px-2 py-0.5 rounded bg-[#fffaf5] border border-[#f0e6d9] text-xs text-[#1a0a00]">
+                <td className="py-4 px-5 text-[#666666] capitalize">
+                  <span className="px-2 py-0.5 rounded-full bg-[#faf9f6] border border-[#e8e4dd] text-xs text-[#111111]">
                     {item.type}
                   </span>
                 </td>
@@ -98,28 +98,28 @@ export const InventoryTable: React.FC<InventoryTableProps> = ({
                       type="number"
                       value={editStock}
                       onChange={(e) => setEditStock(Number(e.target.value))}
-                      className="w-24 px-2 py-1 bg-[#fffaf5] border border-[#ff4500] rounded text-[#1a0a00] font-bold text-sm focus:outline-none"
+                      className="w-24 px-2 py-1 bg-[#faf9f6] border border-[#2d5a27] rounded text-[#111111] font-semibold text-sm focus:outline-none"
                       min={0}
                     />
                   ) : (
                     <button
                       type="button"
                       onClick={() => startEdit(item)}
-                      className="group flex items-center gap-1.5 font-bold hover:text-[#ff4500] transition-colors"
+                      className="group flex items-center gap-1.5 font-semibold hover:text-[#2d5a27] transition-colors"
                       title="Click to inline edit"
                     >
                       <span
                         className={
                           isCritical
-                            ? 'text-red-500 font-extrabold text-base'
+                            ? 'text-red-500 font-bold text-base'
                             : isLow
-                            ? 'text-amber-600 font-extrabold text-base'
-                            : 'text-[#1a0a00]'
+                            ? 'text-amber-600 font-bold text-base'
+                            : 'text-[#111111]'
                         }
                       >
                         {item.stock}
                       </span>
-                      <Edit2 className="w-3 h-3 opacity-0 group-hover:opacity-100 text-[#8a6a50] transition-opacity" />
+                      <Edit2 className="w-3 h-3 opacity-0 group-hover:opacity-100 text-[#666666] transition-opacity" />
                     </button>
                   )}
                 </td>
@@ -131,16 +131,16 @@ export const InventoryTable: React.FC<InventoryTableProps> = ({
                       type="number"
                       value={editThreshold}
                       onChange={(e) => setEditThreshold(Number(e.target.value))}
-                      className="w-20 px-2 py-1 bg-[#fffaf5] border border-[#f0e6d9] rounded text-[#1a0a00] text-sm focus:outline-none"
+                      className="w-20 px-2 py-1 bg-[#faf9f6] border border-[#e8e4dd] rounded text-[#111111] text-sm focus:outline-none"
                       min={0}
                     />
                   ) : (
-                    <span className="text-[#8a6a50]">{item.threshold}</span>
+                    <span className="text-[#666666]">{item.threshold}</span>
                   )}
                 </td>
 
                 {/* Unit */}
-                <td className="py-4 px-5 text-[#8a6a50] text-xs">{item.unit}</td>
+                <td className="py-4 px-5 text-[#666666] text-xs">{item.unit}</td>
 
                 {/* Status Badge */}
                 <td className="py-4 px-5">
@@ -157,7 +157,7 @@ export const InventoryTable: React.FC<InventoryTableProps> = ({
                         type="button"
                         disabled={isSaving}
                         onClick={() => saveEdit(item._id)}
-                        className="p-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white transition-colors"
+                        className="p-1.5 rounded-lg bg-[#2d5a27] hover:bg-[#23471f] text-white transition-colors"
                         title="Save changes"
                       >
                         <Check className="w-4 h-4" />
@@ -165,7 +165,7 @@ export const InventoryTable: React.FC<InventoryTableProps> = ({
                       <button
                         type="button"
                         onClick={cancelEdit}
-                        className="p-1.5 rounded-lg bg-[#fffaf5] border border-[#f0e6d9] text-[#8a6a50] hover:text-[#1a0a00] transition-colors"
+                        className="p-1.5 rounded-lg bg-[#faf9f6] border border-[#e8e4dd] text-[#666666] hover:text-[#111111] transition-colors"
                         title="Cancel"
                       >
                         <X className="w-4 h-4" />
@@ -175,7 +175,7 @@ export const InventoryTable: React.FC<InventoryTableProps> = ({
                     <button
                       type="button"
                       onClick={() => startEdit(item)}
-                      className="px-3 py-1 rounded-lg bg-[#fffaf5] border border-[#f0e6d9] hover:border-[#ff4500] text-[#1a0a00] hover:text-[#ff4500] text-xs font-bold transition-colors"
+                      className="px-3 py-1 rounded-full bg-[#faf9f6] border border-[#e8e4dd] hover:border-[#111111] text-[#111111] hover:text-[#2d5a27] text-xs font-medium transition-colors"
                     >
                       Edit
                     </button>

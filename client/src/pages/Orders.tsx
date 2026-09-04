@@ -66,25 +66,25 @@ export const Orders: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#fffaf5] py-12 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+    <div className="min-h-screen bg-[#faf9f6] py-12 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
       {/* Header */}
       <div className="mb-10">
-        <span className="text-xs font-black uppercase tracking-widest text-[#ff4500]">
+        <span className="text-xs font-medium tracking-widest text-[#666666] uppercase">
           Live Kitchen Tracking
         </span>
-        <h1 className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-[#1a0a00] mt-1">
+        <h1 className="font-serif text-3xl sm:text-5xl font-normal tracking-tight text-[#111111] mt-1">
           Your Orders
         </h1>
-        <p className="text-sm text-[#8a6a50] mt-1">
-          Watch your pizzas bake and travel in real-time. Instant live websocket updates.
+        <p className="text-xs sm:text-sm text-[#666666] mt-1">
+          Follow your pizzas as they bake and travel in real-time.
         </p>
       </div>
 
       {loading ? (
         <div className="space-y-4">
-          <Skeleton className="w-full h-36 rounded-2xl" />
-          <Skeleton className="w-full h-36 rounded-2xl" />
-          <Skeleton className="w-full h-36 rounded-2xl" />
+          <Skeleton className="w-full h-32 rounded-2xl" />
+          <Skeleton className="w-full h-32 rounded-2xl" />
+          <Skeleton className="w-full h-32 rounded-2xl" />
         </div>
       ) : orders.length === 0 ? (
         <EmptyState
@@ -95,30 +95,29 @@ export const Orders: React.FC = () => {
           actionLink="/menu"
         />
       ) : (
-        <div className="space-y-6">
+        <div className="space-y-4">
           {orders.map((order) => {
             const isExpanded = Boolean(expandedOrders[order._id]);
-            const isDelivered = order.status === 'delivered';
 
             return (
               <div
                 key={order._id}
-                className="rounded-2xl border border-[#f0e6d9] bg-white overflow-hidden shadow-blaze-card transition-all duration-200 hover:border-[#ff4500]"
+                className="rounded-2xl border border-[#e8e4dd] bg-white overflow-hidden transition-all duration-200 hover:border-[#111111]/30"
               >
                 {/* Order Summary Header */}
                 <div
                   onClick={() => toggleExpand(order._id)}
-                  className="p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 cursor-pointer select-none bg-white hover:bg-[#fffaf5] transition-colors"
+                  className="p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 cursor-pointer select-none bg-white hover:bg-[#faf9f6] transition-colors"
                 >
                   <div className="space-y-1.5">
                     <div className="flex items-center gap-3">
-                      <span className="font-mono text-xs font-black text-[#8a6a50]">
+                      <span className="font-mono text-xs text-[#888888]">
                         #{order._id.substring(order._id.length - 8).toUpperCase()}
                       </span>
                       <StatusBadge status={order.status} />
                     </div>
 
-                    <div className="text-xs text-[#8a6a50] flex items-center gap-2">
+                    <div className="text-xs text-[#888888] flex items-center gap-2">
                       <Calendar className="w-3.5 h-3.5" />
                       <span>{new Date(order.createdAt).toLocaleDateString('en-US', {
                         year: 'numeric',
@@ -132,26 +131,26 @@ export const Orders: React.FC = () => {
 
                   <div className="flex items-center justify-between sm:justify-end gap-6">
                     <div className="text-right">
-                      <span className="text-[11px] uppercase font-bold text-[#8a6a50] block">
+                      <span className="text-[10px] uppercase tracking-wider text-[#888888] block">
                         Total Amount
                       </span>
-                      <span className="text-lg font-black text-[#ff4500]">
+                      <span className="text-base font-medium text-[#111111]">
                         ₦{order.totalAmount.toLocaleString()}
                       </span>
                     </div>
 
-                    <div className="w-8 h-8 rounded-full bg-[#fffaf5] border border-[#f0e6d9] flex items-center justify-center text-[#8a6a50]">
+                    <div className="w-7 h-7 rounded-full bg-[#faf9f6] border border-[#e8e4dd] flex items-center justify-center text-[#666666]">
                       {isExpanded ? (
-                        <ChevronUp className="w-4 h-4" />
+                        <ChevronUp className="w-3.5 h-3.5" />
                       ) : (
-                        <ChevronDown className="w-4 h-4" />
+                        <ChevronDown className="w-3.5 h-3.5" />
                       )}
                     </div>
                   </div>
                 </div>
 
                 {/* Real-time status pipeline for active or delivered order */}
-                <div className="px-6 py-4 bg-[#fffaf5] border-t border-[#f0e6d9]">
+                <div className="px-6 py-4 bg-[#faf9f6] border-t border-[#e8e4dd]">
                   <OrderStatusPipeline status={order.status} />
                 </div>
 
@@ -162,32 +161,32 @@ export const Orders: React.FC = () => {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      className="border-t border-[#f0e6d9] px-6 py-5 bg-white space-y-5"
+                      className="border-t border-[#e8e4dd] px-6 py-5 bg-white space-y-5"
                     >
                       {/* Items */}
                       <div>
-                        <h4 className="text-xs font-black uppercase tracking-wider text-[#8a6a50] mb-3">
+                        <h4 className="text-xs font-medium tracking-wide text-[#888888] uppercase mb-3">
                           Items in this Order
                         </h4>
-                        <div className="space-y-2.5">
+                        <div className="space-y-2">
                           {order.items.map((item, idx) => (
                             <div
                               key={idx}
-                              className="flex items-center justify-between p-3 rounded-xl bg-[#fffaf5] border border-[#f0e6d9] text-xs"
+                              className="flex items-center justify-between p-3 rounded-xl bg-[#faf9f6] border border-[#e8e4dd] text-xs"
                             >
                               <div>
-                                <span className="font-black text-[#1a0a00] uppercase tracking-tight">
+                                <span className="font-serif text-[#111111] text-sm">
                                   {item.quantity}x {item.name || 'Artisanal Pizza'}
                                 </span>
                                 {item.customization && (
-                                  <p className="text-[11px] text-[#8a6a50] mt-0.5">
+                                  <p className="text-[11px] text-[#666666] mt-0.5">
                                     Base: {item.customization.base} · Sauce: {item.customization.sauce} · Cheese: {item.customization.cheese}
                                     {item.customization.vegetables?.length > 0 &&
                                       ` · Veg: ${item.customization.vegetables.join(', ')}`}
                                   </p>
                                 )}
                               </div>
-                              <span className="font-extrabold text-[#1a0a00] text-sm">
+                              <span className="font-medium text-[#111111] text-xs">
                                 ₦{(item.price * item.quantity).toLocaleString()}
                               </span>
                             </div>
@@ -196,28 +195,28 @@ export const Orders: React.FC = () => {
                       </div>
 
                       {/* Delivery Address & Details */}
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-3 border-t border-[#f0e6d9] text-xs text-[#8a6a50]">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-3 border-t border-[#e8e4dd] text-xs text-[#666666]">
                         <div className="flex items-start gap-2">
-                          <MapPin className="w-4 h-4 text-[#ff4500] flex-shrink-0 mt-0.5" />
+                          <MapPin className="w-4 h-4 text-[#111111] flex-shrink-0 mt-0.5" />
                           <div>
-                            <span className="font-bold text-[#1a0a00] uppercase block">
+                            <span className="font-medium text-[#111111] block">
                               Delivery Destination
                             </span>
                             <span>{order.deliveryAddress.street}, {order.deliveryAddress.city}, {order.deliveryAddress.state}</span>
                             {order.deliveryAddress.phone && (
-                              <div className="text-[#8a6a50] mt-0.5">Rider contact: {order.deliveryAddress.phone}</div>
+                              <div className="text-[#888888] mt-0.5">Contact: {order.deliveryAddress.phone}</div>
                             )}
                           </div>
                         </div>
 
                         <div className="flex items-start gap-2">
-                          <CreditCard className="w-4 h-4 text-emerald-600 flex-shrink-0 mt-0.5" />
+                          <CreditCard className="w-4 h-4 text-[#2d5a27] flex-shrink-0 mt-0.5" />
                           <div>
-                            <span className="font-bold text-[#1a0a00] uppercase block">
+                            <span className="font-medium text-[#111111] block">
                               Payment Verification
                             </span>
-                            <span className="text-emerald-600 font-bold">Paid via Razorpay</span>
-                            <div className="text-[#8a6a50] font-mono text-[10px] truncate mt-0.5">
+                            <span className="text-[#2d5a27] font-medium">Paid via Razorpay</span>
+                            <div className="text-[#888888] font-mono text-[10px] truncate mt-0.5">
                               Payment ID: {order.razorpayPaymentId || 'pay_verified'}
                             </div>
                           </div>

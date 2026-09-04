@@ -84,10 +84,10 @@ export const AdminOrders: React.FC = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <span className="text-xs font-black uppercase tracking-widest text-[#ff4500]">
+          <span className="text-xs font-medium tracking-widest text-[#2d5a27] uppercase">
             Kitchen Operations
           </span>
-          <h1 className="text-3xl font-black uppercase tracking-tight text-[#1a0a00] mt-1">
+          <h1 className="font-serif text-3xl font-normal tracking-tight text-[#111111] mt-1">
             Order Management
           </h1>
         </div>
@@ -95,7 +95,7 @@ export const AdminOrders: React.FC = () => {
         <button
           type="button"
           onClick={fetchOrders}
-          className="self-start sm:self-auto flex items-center gap-2 px-4 py-2.5 rounded-xl border border-[#f0e6d9] bg-white text-xs font-black uppercase tracking-wider text-[#1a0a00] hover:text-[#ff4500] hover:border-[#ff4500] shadow-sm transition-colors"
+          className="self-start sm:self-auto flex items-center gap-2 px-4 py-2.5 rounded-full border border-[#e8e4dd] bg-white text-xs font-medium tracking-wide text-[#111111] hover:border-[#111111] shadow-xs transition-colors cursor-pointer"
         >
           <RefreshCw className="w-3.5 h-3.5" />
           <span>Refresh Orders</span>
@@ -113,10 +113,10 @@ export const AdminOrders: React.FC = () => {
                 key={tab.value}
                 type="button"
                 onClick={() => setSelectedStatus(tab.value)}
-                className={`px-3.5 py-2 rounded-xl text-xs font-black uppercase tracking-wider transition-colors whitespace-nowrap ${
+                className={`px-3.5 py-2 rounded-full text-xs font-medium tracking-wide transition-colors whitespace-nowrap cursor-pointer ${
                   isActive
-                    ? 'bg-[#ff4500] text-white shadow-md shadow-[#ff4500]/25'
-                    : 'bg-white border border-[#f0e6d9] text-[#8a6a50] hover:text-[#1a0a00]'
+                    ? 'bg-[#111111] text-white shadow-xs'
+                    : 'bg-white border border-[#e8e4dd] text-[#666666] hover:text-[#111111]'
                 }`}
               >
                 {tab.label}
@@ -127,19 +127,19 @@ export const AdminOrders: React.FC = () => {
 
         {/* Search */}
         <div className="relative w-full md:w-72">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8a6a50]" />
+          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#888888]" />
           <input
             type="text"
             placeholder="Search by order ID or customer..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-white border border-[#f0e6d9] focus:border-[#ff4500] rounded-xl pl-10 pr-4 py-2 text-xs text-[#1a0a00] placeholder-[#8a6a50]/60 focus:outline-none transition-colors"
+            className="w-full bg-white border border-[#e8e4dd] focus:border-[#111111] rounded-full pl-10 pr-4 py-2 text-xs text-[#111111] placeholder-[#888888] focus:outline-none transition-colors"
           />
         </div>
       </div>
 
       {/* Full Orders Table */}
-      <div className="w-full overflow-x-auto rounded-2xl border border-[#f0e6d9] bg-white shadow-blaze-card">
+      <div className="w-full overflow-x-auto rounded-2xl border border-[#e8e4dd] bg-white shadow-xs">
         {loading ? (
           <div className="p-8 space-y-4">
             <Skeleton className="w-full h-12" />
@@ -147,13 +147,13 @@ export const AdminOrders: React.FC = () => {
             <Skeleton className="w-full h-12" />
           </div>
         ) : orders.length === 0 ? (
-          <div className="text-center py-16 text-[#8a6a50] text-sm">
+          <div className="text-center py-16 text-[#666666] text-sm">
             No orders match the selected filters.
           </div>
         ) : (
           <table className="w-full text-left border-collapse text-xs">
             <thead>
-              <tr className="border-b border-[#f0e6d9] bg-[#fffaf5] text-[11px] font-black uppercase tracking-wider text-[#8a6a50]">
+              <tr className="border-b border-[#e8e4dd] bg-[#faf9f6] text-[11px] font-medium uppercase tracking-wider text-[#666666]">
                 <th className="py-4 px-4">Order ID</th>
                 <th className="py-4 px-4">Customer</th>
                 <th className="py-4 px-4">Address</th>
@@ -163,41 +163,41 @@ export const AdminOrders: React.FC = () => {
                 <th className="py-4 px-4">Status Transition</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#f0e6d9]">
+            <tbody className="divide-y divide-[#e8e4dd]">
               {orders.map((order) => {
                 const isUpdating = updatingId === order._id;
 
                 return (
-                  <tr key={order._id} className="hover:bg-[#fffaf5] transition-colors">
+                  <tr key={order._id} className="hover:bg-[#faf9f6] transition-colors">
                     {/* ID */}
-                    <td className="py-4 px-4 font-mono font-bold text-[#1a0a00]">
+                    <td className="py-4 px-4 font-mono font-medium text-[#111111]">
                       #{order._id.substring(order._id.length - 8).toUpperCase()}
                     </td>
 
                     {/* Customer */}
                     <td className="py-4 px-4">
-                      <span className="font-bold text-[#1a0a00] block">
+                      <span className="font-medium text-[#111111] block">
                         {typeof order.user === 'object' ? order.user?.name : 'Customer'}
                       </span>
-                      <span className="text-[10px] text-[#8a6a50] block">
+                      <span className="text-[10px] text-[#666666] block">
                         {typeof order.user === 'object' ? order.user?.email : ''}
                       </span>
                     </td>
 
                     {/* Address */}
-                    <td className="py-4 px-4 text-[#8a6a50] max-w-xs truncate">
+                    <td className="py-4 px-4 text-[#666666] max-w-xs truncate">
                       {order.deliveryAddress.street}, {order.deliveryAddress.city}
                     </td>
 
                     {/* Items */}
-                    <td className="py-4 px-4 text-[#8a6a50]">
+                    <td className="py-4 px-4 text-[#666666]">
                       <div className="space-y-1">
                         {order.items.map((it, idx) => (
                           <div key={idx} className="truncate max-w-xs">
-                            <span className="font-bold text-[#1a0a00]">{it.quantity}x</span>{' '}
+                            <span className="font-medium text-[#111111]">{it.quantity}x</span>{' '}
                             {it.name || 'Custom Pizza'}
                             {it.customization && (
-                              <span className="text-[10px] text-[#8a6a50] ml-1">
+                              <span className="text-[10px] text-[#666666] ml-1">
                                 ({it.customization.base}, {it.customization.cheese})
                               </span>
                             )}
@@ -207,12 +207,12 @@ export const AdminOrders: React.FC = () => {
                     </td>
 
                     {/* Total */}
-                    <td className="py-4 px-4 font-black text-[#ff4500] text-sm">
+                    <td className="py-4 px-4 font-semibold text-[#111111] text-sm">
                       ₦{order.totalAmount.toLocaleString()}
                     </td>
 
                     {/* Time */}
-                    <td className="py-4 px-4 text-[#8a6a50] whitespace-nowrap">
+                    <td className="py-4 px-4 text-[#666666] whitespace-nowrap">
                       {new Date(order.createdAt).toLocaleTimeString([], {
                         hour: '2-digit',
                         minute: '2-digit',
@@ -225,14 +225,14 @@ export const AdminOrders: React.FC = () => {
                         value={order.status}
                         disabled={isUpdating}
                         onChange={(e) => handleStatusChange(order._id, e.target.value)}
-                        className={`bg-white border rounded-lg px-2.5 py-1.5 text-xs font-bold transition-all focus:outline-none ${
+                        className={`bg-white border rounded-full px-3 py-1 text-xs font-medium transition-all focus:outline-none cursor-pointer ${
                           order.status === 'delivered'
-                            ? 'border-emerald-500 text-emerald-600'
+                            ? 'border-[#2d5a27] text-[#2d5a27]'
                             : order.status === 'sent_to_delivery'
-                            ? 'border-[#ff4500] text-[#ff4500]'
+                            ? 'border-[#111111] text-[#111111]'
                             : order.status === 'in_kitchen'
-                            ? 'border-amber-500 text-amber-600'
-                            : 'border-blue-500 text-blue-600'
+                            ? 'border-amber-600 text-amber-700'
+                            : 'border-neutral-400 text-[#111111]'
                         }`}
                       >
                         <option value="order_received">Order Received</option>

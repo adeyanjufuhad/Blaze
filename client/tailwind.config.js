@@ -4,22 +4,35 @@ export default {
   theme: {
     extend: {
       colors: {
-        blaze: {
-          bg: '#fffaf5',
+        oriente: {
+          bg: '#faf9f6',
           card: '#ffffff',
-          dark: '#1a0a00',
-          orange: '#ff4500',
-          'orange-light': '#ff6b35',
-          'orange-glow': 'rgba(255, 69, 0, 0.25)',
-          'orange-hover': '#e03d00',
-          'orange-tint': '#fff5f0',
-          border: '#f0e6d9',
-          muted: '#8a6a50',
-          admin: '#f9f5f0',
-          'admin-dark': '#1a0a00',
+          primary: '#111111',
+          secondary: '#666666',
+          accent: '#2d5a27',
+          'accent-hover': '#23471f',
+          border: '#e8e4dd',
+          badge: '#111111',
+          tint: '#f5f2ed',
+          catering: '#f0ece4',
+        },
+        blaze: {
+          bg: '#faf9f6',
+          card: '#ffffff',
+          dark: '#111111',
+          orange: '#2d5a27',
+          'orange-light': '#3a7332',
+          'orange-glow': 'rgba(45, 90, 39, 0.15)',
+          'orange-hover': '#23471f',
+          'orange-tint': '#f5f2ed',
+          border: '#e8e4dd',
+          muted: '#666666',
+          admin: '#faf9f6',
+          'admin-dark': '#111111',
         },
       },
       fontFamily: {
+        serif: ['"Playfair Display"', 'Georgia', 'serif'],
         sans: [
           'Inter',
           '-apple-system',
@@ -30,13 +43,15 @@ export default {
         ],
       },
       boxShadow: {
-        'blaze-card': '0 2px 20px rgba(255, 69, 0, 0.08)',
-        'blaze-card-hover': '0 8px 30px rgba(255, 69, 0, 0.14)',
-        'blaze-glow': '0 0 25px rgba(255, 69, 0, 0.35)',
+        'oriente-subtle': '0 2px 10px rgba(0, 0, 0, 0.03)',
+        'oriente-card': '0 1px 3px rgba(0, 0, 0, 0.04)',
       },
       animation: {
+        'marquee-fast': 'marquee 20s linear infinite',
         marquee: 'marquee 25s linear infinite',
+        'marquee-slow': 'marquee 35s linear infinite',
         'marquee-reverse': 'marquee-reverse 25s linear infinite',
+        'marquee-reverse-slow': 'marquee-reverse 35s linear infinite',
       },
       keyframes: {
         marquee: {

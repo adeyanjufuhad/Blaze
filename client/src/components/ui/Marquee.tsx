@@ -48,7 +48,7 @@ export const Marquee: React.FC<MarqueeProps> = ({
 
   return (
     <div
-      className={`relative w-full overflow-hidden whitespace-nowrap bg-[#ff4500] border-y border-[#ff6b35]/40 py-3.5 select-none shadow-md ${className}`}
+      className={`relative w-full overflow-hidden whitespace-nowrap bg-[#111111] border-y border-[#222222] py-3.5 select-none ${className}`}
     >
       <div className={`flex w-max ${animationClass} ${gapClasses[gap]} items-center`}>
         {repeated.map((_, i) => (
@@ -56,10 +56,10 @@ export const Marquee: React.FC<MarqueeProps> = ({
             {contentList.map((item, idx) => (
               <span
                 key={`${i}-${idx}`}
-                className={`flex items-center text-sm md:text-base font-black tracking-widest uppercase text-white transition-colors duration-200 ${itemClassName}`}
+                className={`flex items-center text-xs md:text-sm font-medium tracking-widest uppercase text-[#faf9f6] ${itemClassName}`}
               >
                 {item}
-                <span className="mx-4 inline-block text-white/70 text-xs">✦</span>
+                <span className="mx-4 inline-block text-[#666666] text-xs">✦</span>
               </span>
             ))}
           </React.Fragment>

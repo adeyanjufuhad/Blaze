@@ -82,13 +82,13 @@ export const AdminInventory: React.FC = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <span className="text-xs font-black uppercase tracking-widest text-[#ff4500]">
+          <span className="text-xs font-medium tracking-widest text-[#2d5a27] uppercase">
             Stock Control
           </span>
-          <h1 className="text-3xl font-black uppercase tracking-tight text-[#1a0a00] mt-1">
+          <h1 className="font-serif text-3xl font-normal tracking-tight text-[#111111] mt-1">
             Ingredient Inventory
           </h1>
-          <p className="text-xs text-[#8a6a50] mt-1">
+          <p className="text-xs text-[#666666] mt-1">
             Manage thresholds, monitor real-time stock levels, and automate daily reorder notifications.
           </p>
         </div>
@@ -98,7 +98,7 @@ export const AdminInventory: React.FC = () => {
             type="button"
             onClick={handleTriggerAlert}
             disabled={isAlerting}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-red-200 bg-red-50 text-red-600 hover:bg-red-100 text-xs font-black uppercase tracking-wider transition-colors cursor-pointer shadow-sm"
+            className="flex items-center gap-2 px-4 py-2.5 rounded-full border border-red-200 bg-red-50 text-red-600 hover:bg-red-100 text-xs font-medium tracking-wide transition-colors cursor-pointer shadow-xs"
             title="Execute node-cron stock check now and dispatch email alert"
           >
             <BellRing className="w-3.5 h-3.5" />
@@ -108,7 +108,7 @@ export const AdminInventory: React.FC = () => {
           <button
             type="button"
             onClick={fetchInventory}
-            className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-[#f0e6d9] bg-white text-xs font-black uppercase tracking-wider text-[#1a0a00] hover:text-[#ff4500] hover:border-[#ff4500] shadow-sm transition-colors"
+            className="flex items-center gap-2 px-4 py-2.5 rounded-full border border-[#e8e4dd] bg-white text-xs font-medium tracking-wide text-[#111111] hover:border-[#111111] shadow-xs transition-colors cursor-pointer"
           >
             <RefreshCw className="w-3.5 h-3.5" />
             <span>Refresh</span>
@@ -126,10 +126,10 @@ export const AdminInventory: React.FC = () => {
                 key={tab.value}
                 type="button"
                 onClick={() => setSelectedType(tab.value)}
-                className={`px-3.5 py-2 rounded-xl text-xs font-black uppercase tracking-wider transition-colors whitespace-nowrap ${
+                className={`px-3.5 py-2 rounded-full text-xs font-medium tracking-wide transition-colors whitespace-nowrap cursor-pointer ${
                   isActive
-                    ? 'bg-[#ff4500] text-white shadow-md shadow-[#ff4500]/25'
-                    : 'bg-white border border-[#f0e6d9] text-[#8a6a50] hover:text-[#1a0a00]'
+                    ? 'bg-[#111111] text-white shadow-xs'
+                    : 'bg-white border border-[#e8e4dd] text-[#666666] hover:text-[#111111]'
                 }`}
               >
                 {tab.label}
@@ -142,10 +142,10 @@ export const AdminInventory: React.FC = () => {
         <button
           type="button"
           onClick={() => setLowOnly(!lowOnly)}
-          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-black uppercase tracking-wider border transition-colors cursor-pointer ${
+          className={`flex items-center gap-2 px-4 py-2 rounded-full text-xs font-medium tracking-wide border transition-colors cursor-pointer ${
             lowOnly
-              ? 'bg-red-500 border-red-500 text-white shadow-md shadow-red-500/20'
-              : 'bg-white border-[#f0e6d9] text-[#8a6a50] hover:text-[#1a0a00]'
+              ? 'bg-red-500 border-red-500 text-white shadow-xs'
+              : 'bg-white border-[#e8e4dd] text-[#666666] hover:text-[#111111]'
           }`}
         >
           <AlertTriangle className="w-3.5 h-3.5" />
@@ -155,7 +155,7 @@ export const AdminInventory: React.FC = () => {
 
       {/* Inventory Table */}
       {loading ? (
-        <div className="p-8 space-y-4 rounded-2xl border border-[#f0e6d9] bg-white shadow-blaze-card">
+        <div className="p-8 space-y-4 rounded-2xl border border-[#e8e4dd] bg-white shadow-xs">
           <Skeleton className="w-full h-12" />
           <Skeleton className="w-full h-12" />
           <Skeleton className="w-full h-12" />

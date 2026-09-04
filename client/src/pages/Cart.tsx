@@ -90,7 +90,7 @@ export const Cart: React.FC = () => {
             contact: address.phone || '',
           },
           theme: {
-            color: '#ff4500',
+            color: '#111111',
           },
         };
 
@@ -151,11 +151,11 @@ export const Cart: React.FC = () => {
 
   if (items.length === 0) {
     return (
-      <div className="min-h-screen bg-[#fffaf5] py-20 px-4 max-w-4xl mx-auto">
+      <div className="min-h-screen bg-[#faf9f6] py-20 px-4 max-w-4xl mx-auto">
         <EmptyState
           icon={ShoppingBag}
           title="Your bag is empty"
-          description="You haven't added any blazing hot pizzas or custom creations yet. Head to our menu or design your own pie!"
+          description="You haven't added any artisanal pizzas or custom creations yet. Head to our menu to discover our wood-fired lineup."
           actionText="Browse Menu"
           actionLink="/menu"
         />
@@ -164,13 +164,13 @@ export const Cart: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#fffaf5] py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <div className="min-h-screen bg-[#faf9f6] py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       {/* Page Header */}
       <div className="mb-10">
-        <span className="text-xs font-black uppercase tracking-widest text-[#ff4500]">
+        <span className="text-xs font-medium tracking-widest text-[#666666] uppercase">
           Checkout & Delivery
         </span>
-        <h1 className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-[#1a0a00] mt-1">
+        <h1 className="font-serif text-3xl sm:text-5xl font-normal tracking-tight text-[#111111] mt-1">
           Review Your Order
         </h1>
       </div>
@@ -179,24 +179,24 @@ export const Cart: React.FC = () => {
         {/* Left Col: Cart Items + Delivery Address Form */}
         <div className="lg:col-span-7 space-y-8">
           {/* Cart Items List */}
-          <div className="rounded-2xl border border-[#f0e6d9] bg-white p-6 space-y-4 shadow-blaze-card">
-            <div className="flex items-center justify-between pb-4 border-b border-[#f0e6d9]">
-              <h3 className="font-black text-lg uppercase tracking-tight text-[#1a0a00]">
+          <div className="rounded-2xl border border-[#e8e4dd] bg-white p-6 space-y-4">
+            <div className="flex items-center justify-between pb-4 border-b border-[#e8e4dd]">
+              <h3 className="font-serif text-lg font-normal text-[#111111]">
                 Bag Items ({items.length})
               </h3>
               <button
                 type="button"
                 onClick={clearCart}
-                className="text-xs font-bold text-[#8a6a50] hover:text-[#ff4500] transition-colors uppercase tracking-wider"
+                className="text-xs font-medium text-[#888888] hover:text-[#111111] transition-colors uppercase tracking-wider cursor-pointer"
               >
                 Clear All
               </button>
             </div>
 
-            <div className="divide-y divide-[#f0e6d9]">
+            <div className="divide-y divide-[#e8e4dd]">
               {items.map((item) => (
                 <div key={item.id} className="py-4 flex gap-4 items-center">
-                  <div className="h-20 w-20 flex-shrink-0 overflow-hidden rounded-xl bg-[#fffaf5] border border-[#f0e6d9]">
+                  <div className="h-20 w-20 flex-shrink-0 overflow-hidden rounded-xl bg-[#faf9f6] border border-[#e8e4dd]">
                     <img
                       src={
                         item.image ||
@@ -208,12 +208,12 @@ export const Cart: React.FC = () => {
                   </div>
 
                   <div className="flex-1">
-                    <h4 className="font-black text-sm uppercase tracking-tight text-[#1a0a00]">
+                    <h4 className="font-serif text-sm font-normal text-[#111111]">
                       {item.name}
                     </h4>
 
                     {item.isCustom && item.customization && (
-                      <p className="text-xs text-[#8a6a50] mt-0.5">
+                      <p className="text-xs text-[#666666] mt-0.5">
                         {item.customization.base} · {item.customization.sauce} ·{' '}
                         {item.customization.cheese}
                         {item.customization.vegetables?.length > 0 &&
@@ -221,29 +221,29 @@ export const Cart: React.FC = () => {
                       </p>
                     )}
 
-                    <div className="text-sm font-black text-[#ff4500] mt-1">
+                    <div className="text-xs font-medium text-[#111111] mt-1">
                       ₦{(item.price * item.quantity).toLocaleString()}
                     </div>
                   </div>
 
                   {/* Quantity Stepper + Remove */}
                   <div className="flex items-center gap-2">
-                    <div className="flex items-center gap-2 rounded-xl bg-[#fffaf5] border border-[#f0e6d9] px-2 py-1">
+                    <div className="flex items-center gap-2 rounded-full bg-[#faf9f6] border border-[#e8e4dd] px-2 py-0.5">
                       <button
                         type="button"
                         onClick={() => updateQty(item.id, -1)}
-                        className="text-[#8a6a50] hover:text-[#1a0a00] p-1"
+                        className="text-[#666666] hover:text-[#111111] p-1"
                         aria-label="Decrease quantity"
                       >
                         <Minus className="w-3 h-3" />
                       </button>
-                      <span className="text-xs font-bold w-4 text-center text-[#1a0a00]">
+                      <span className="text-xs font-medium w-4 text-center text-[#111111]">
                         {item.quantity}
                       </span>
                       <button
                         type="button"
                         onClick={() => updateQty(item.id, 1)}
-                        className="text-[#8a6a50] hover:text-[#1a0a00] p-1"
+                        className="text-[#666666] hover:text-[#111111] p-1"
                         aria-label="Increase quantity"
                       >
                         <Plus className="w-3 h-3" />
@@ -253,7 +253,7 @@ export const Cart: React.FC = () => {
                     <button
                       type="button"
                       onClick={() => removeItem(item.id)}
-                      className="p-2 text-[#8a6a50] hover:text-[#ff4500] transition-colors"
+                      className="p-2 text-[#888888] hover:text-red-500 transition-colors cursor-pointer"
                       aria-label="Remove item"
                     >
                       <Trash2 className="w-4 h-4" />
@@ -265,17 +265,17 @@ export const Cart: React.FC = () => {
           </div>
 
           {/* Delivery Address Form */}
-          <div className="rounded-2xl border border-[#f0e6d9] bg-white p-6 shadow-blaze-card space-y-4">
-            <div className="flex items-center gap-2 pb-4 border-b border-[#f0e6d9]">
-              <MapPin className="w-5 h-5 text-[#ff4500]" />
-              <h3 className="font-black text-lg uppercase tracking-tight text-[#1a0a00]">
+          <div className="rounded-2xl border border-[#e8e4dd] bg-white p-6 space-y-4">
+            <div className="flex items-center gap-2 pb-4 border-b border-[#e8e4dd]">
+              <MapPin className="w-4 h-4 text-[#111111]" />
+              <h3 className="font-serif text-lg font-normal text-[#111111]">
                 Delivery Address
               </h3>
             </div>
 
             <form onSubmit={handleProceedToPayment} id="checkout-form" className="space-y-4">
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-[#8a6a50] mb-1.5">
+                <label className="block text-xs font-medium tracking-wide text-[#666666] mb-1.5">
                   Street Address *
                 </label>
                 <input
@@ -285,13 +285,13 @@ export const Cart: React.FC = () => {
                   placeholder="e.g. 24 Blaze Boulevard, Apt 4"
                   value={address.street}
                   onChange={handleAddressChange}
-                  className="w-full bg-[#fffaf5] border border-[#f0e6d9] focus:border-[#ff4500] rounded-xl px-4 py-3 text-sm text-[#1a0a00] placeholder-[#8a6a50]/60 focus:outline-none transition-colors"
+                  className="w-full bg-[#faf9f6] border border-[#e8e4dd] focus:border-[#111111] rounded-xl px-4 py-2.5 text-xs text-[#111111] placeholder-[#888888] focus:outline-none transition-colors"
                 />
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-[#8a6a50] mb-1.5">
+                  <label className="block text-xs font-medium tracking-wide text-[#666666] mb-1.5">
                     City *
                   </label>
                   <input
@@ -301,12 +301,12 @@ export const Cart: React.FC = () => {
                     placeholder="e.g. Lagos"
                     value={address.city}
                     onChange={handleAddressChange}
-                    className="w-full bg-[#fffaf5] border border-[#f0e6d9] focus:border-[#ff4500] rounded-xl px-4 py-3 text-sm text-[#1a0a00] placeholder-[#8a6a50]/60 focus:outline-none transition-colors"
+                    className="w-full bg-[#faf9f6] border border-[#e8e4dd] focus:border-[#111111] rounded-xl px-4 py-2.5 text-xs text-[#111111] placeholder-[#888888] focus:outline-none transition-colors"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-[#8a6a50] mb-1.5">
+                  <label className="block text-xs font-medium tracking-wide text-[#666666] mb-1.5">
                     State / Province *
                   </label>
                   <input
@@ -316,13 +316,13 @@ export const Cart: React.FC = () => {
                     placeholder="e.g. Lagos State"
                     value={address.state}
                     onChange={handleAddressChange}
-                    className="w-full bg-[#fffaf5] border border-[#f0e6d9] focus:border-[#ff4500] rounded-xl px-4 py-3 text-sm text-[#1a0a00] placeholder-[#8a6a50]/60 focus:outline-none transition-colors"
+                    className="w-full bg-[#faf9f6] border border-[#e8e4dd] focus:border-[#111111] rounded-xl px-4 py-2.5 text-xs text-[#111111] placeholder-[#888888] focus:outline-none transition-colors"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-[#8a6a50] mb-1.5">
+                <label className="block text-xs font-medium tracking-wide text-[#666666] mb-1.5">
                   Phone Number (For Rider Contact)
                 </label>
                 <input
@@ -331,7 +331,7 @@ export const Cart: React.FC = () => {
                   placeholder="e.g. +234 801 234 5678"
                   value={address.phone}
                   onChange={handleAddressChange}
-                  className="w-full bg-[#fffaf5] border border-[#f0e6d9] focus:border-[#ff4500] rounded-xl px-4 py-3 text-sm text-[#1a0a00] placeholder-[#8a6a50]/60 focus:outline-none transition-colors"
+                  className="w-full bg-[#faf9f6] border border-[#e8e4dd] focus:border-[#111111] rounded-xl px-4 py-2.5 text-xs text-[#111111] placeholder-[#888888] focus:outline-none transition-colors"
                 />
               </div>
             </form>
@@ -340,30 +340,30 @@ export const Cart: React.FC = () => {
 
         {/* Right Col: Order Summary & Payment Button */}
         <div className="lg:col-span-5">
-          <div className="sticky top-28 rounded-2xl border border-[#f0e6d9] bg-white p-6 space-y-6 shadow-blaze-card">
-            <h3 className="font-black text-lg uppercase tracking-tight text-[#1a0a00] border-b border-[#f0e6d9] pb-4">
+          <div className="sticky top-28 rounded-2xl border border-[#e8e4dd] bg-white p-6 space-y-6">
+            <h3 className="font-serif text-lg font-normal text-[#111111] border-b border-[#e8e4dd] pb-4">
               Order Summary
             </h3>
 
-            <div className="space-y-3 text-sm text-[#8a6a50]">
+            <div className="space-y-2.5 text-xs text-[#666666]">
               <div className="flex justify-between">
                 <span>Subtotal</span>
-                <span className="font-bold text-[#1a0a00]">₦{subtotal.toLocaleString()}</span>
+                <span className="font-medium text-[#111111]">₦{subtotal.toLocaleString()}</span>
               </div>
               <div className="flex justify-between">
                 <span>Flat Delivery Fee</span>
-                <span className="font-bold text-[#1a0a00]">₦{deliveryFee.toLocaleString()}</span>
+                <span className="font-medium text-[#111111]">₦{deliveryFee.toLocaleString()}</span>
               </div>
-              <div className="flex justify-between text-lg font-black text-[#1a0a00] pt-4 border-t border-[#f0e6d9]">
+              <div className="flex justify-between text-base font-medium text-[#111111] pt-3 border-t border-[#e8e4dd]">
                 <span>Total Due</span>
-                <span className="text-[#ff4500] text-2xl">₦{total.toLocaleString()}</span>
+                <span className="font-serif text-xl">₦{total.toLocaleString()}</span>
               </div>
             </div>
 
             {/* Security notice */}
-            <div className="flex items-center gap-2.5 p-3 rounded-xl bg-[#fff5f0] border border-[#f0e6d9] text-xs text-[#8a6a50]">
-              <ShieldCheck className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-              <span>Razorpay 256-bit encrypted test checkout enabled.</span>
+            <div className="flex items-center gap-2.5 p-3 rounded-xl bg-[#faf9f6] border border-[#e8e4dd] text-xs text-[#666666]">
+              <ShieldCheck className="w-4 h-4 text-[#2d5a27] flex-shrink-0" />
+              <span>Razorpay 256-bit encrypted checkout.</span>
             </div>
 
             {/* Action button */}
@@ -371,14 +371,14 @@ export const Cart: React.FC = () => {
               type="submit"
               form="checkout-form"
               disabled={isProcessing}
-              className="w-full flex items-center justify-center gap-2 py-4 rounded-xl bg-[#ff4500] hover:bg-[#e03800] text-white font-black uppercase text-xs tracking-wider transition-all duration-200 shadow-xl shadow-[#ff4500]/30 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+              className="w-full flex items-center justify-center gap-2 py-3 rounded-full bg-[#111111] hover:bg-[#2d5a27] text-white text-xs font-medium tracking-wide transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
             >
               {isProcessing ? (
                 <span>Securing Payment...</span>
               ) : (
                 <>
                   <span>Proceed to Payment · ₦{total.toLocaleString()}</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="w-3.5 h-3.5" />
                 </>
               )}
             </button>
@@ -388,34 +388,34 @@ export const Cart: React.FC = () => {
 
       {/* Mock / Test Payment Modal */}
       {showMockModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-          <div className="w-full max-w-md rounded-2xl border border-[#f0e6d9] bg-white p-6 space-y-6 shadow-2xl">
-            <div className="flex items-center gap-3 border-b border-[#f0e6d9] pb-4">
-              <div className="p-2.5 rounded-xl bg-[#ff4500]/15 text-[#ff4500]">
-                <CreditCard className="w-6 h-6" />
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-xs">
+          <div className="w-full max-w-md rounded-2xl border border-[#e8e4dd] bg-white p-6 space-y-6 shadow-xl">
+            <div className="flex items-center gap-3 border-b border-[#e8e4dd] pb-4">
+              <div className="p-2 rounded-full bg-[#faf9f6] text-[#111111]">
+                <CreditCard className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="text-lg font-black uppercase tracking-tight text-[#1a0a00]">
+                <h3 className="font-serif text-lg font-normal text-[#111111]">
                   Razorpay Sandbox Checkout
                 </h3>
-                <span className="text-xs text-[#8a6a50]">
-                  Instant Test Payment Simulation
+                <span className="text-xs text-[#666666]">
+                  Test Payment Simulation
                 </span>
               </div>
             </div>
 
-            <div className="space-y-2 text-xs text-[#8a6a50] bg-[#fffaf5] p-4 rounded-xl border border-[#f0e6d9]">
+            <div className="space-y-2 text-xs text-[#666666] bg-[#faf9f6] p-4 rounded-xl border border-[#e8e4dd]">
               <div className="flex justify-between">
                 <span>Test Order ID:</span>
-                <span className="text-[#1a0a00] font-mono">{pendingRazorpayData?.orderId}</span>
+                <span className="text-[#111111] font-mono">{pendingRazorpayData?.orderId}</span>
               </div>
               <div className="flex justify-between">
                 <span>Amount:</span>
-                <span className="text-[#ff4500] font-black text-sm">₦{total.toLocaleString()}</span>
+                <span className="text-[#111111] font-medium">₦{total.toLocaleString()}</span>
               </div>
               <div className="flex justify-between">
                 <span>Test Card:</span>
-                <span className="text-[#1a0a00] font-mono">4111 1111 1111 1111</span>
+                <span className="text-[#111111] font-mono">4111 1111 1111 1111</span>
               </div>
             </div>
 
@@ -423,7 +423,7 @@ export const Cart: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setShowMockModal(false)}
-                className="flex-1 py-3 rounded-xl border border-[#f0e6d9] text-xs font-black uppercase text-[#8a6a50] hover:text-[#1a0a00] bg-white transition-colors"
+                className="flex-1 py-2.5 rounded-full border border-[#e8e4dd] text-xs font-medium text-[#666666] hover:text-[#111111] bg-white transition-colors cursor-pointer"
               >
                 Cancel
               </button>
@@ -431,7 +431,7 @@ export const Cart: React.FC = () => {
                 type="button"
                 onClick={handleSimulateTestPayment}
                 disabled={isProcessing}
-                className="flex-1 py-3 rounded-xl bg-[#ff4500] hover:bg-[#e03800] text-xs font-black uppercase text-white shadow-lg shadow-[#ff4500]/30 transition-all"
+                className="flex-1 py-2.5 rounded-full bg-[#111111] hover:bg-[#2d5a27] text-xs font-medium text-white transition-colors cursor-pointer"
               >
                 {isProcessing ? 'Verifying...' : 'Pay ₦' + total.toLocaleString()}
               </button>

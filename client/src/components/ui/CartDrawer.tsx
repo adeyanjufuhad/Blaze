@@ -35,7 +35,7 @@ export const CartDrawer: React.FC = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={closeDrawer}
-            className="absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity"
+            className="absolute inset-0 bg-black/40 backdrop-blur-xs transition-opacity"
           />
 
           {/* Drawer Panel Sliding from Right */}
@@ -45,22 +45,22 @@ export const CartDrawer: React.FC = () => {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 28, stiffness: 300 }}
-              className="w-screen max-w-md bg-white border-l border-[#f0e6d9] text-[#1a0a00] flex flex-col shadow-2xl"
+              className="w-screen max-w-md bg-[#faf9f6] border-l border-[#e8e4dd] text-[#111111] flex flex-col shadow-2xl"
               role="dialog"
               aria-modal="true"
               aria-label="Your cart"
             >
               {/* Header */}
-              <header className="flex items-center justify-between px-6 py-5 border-b border-[#f0e6d9] bg-[#fffaf5]">
+              <header className="flex items-center justify-between px-6 py-5 border-b border-[#e8e4dd] bg-[#faf9f6]">
                 <div className="flex items-center gap-2.5">
-                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#ff4500]/15 text-[#ff4500]">
-                    <ShoppingBag className="w-4 h-4" />
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#111111] text-white">
+                    <ShoppingBag className="w-4 h-4 stroke-[1.8]" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-black uppercase tracking-tight text-[#1a0a00]">
+                    <h3 className="font-serif text-lg text-[#111111] font-normal tracking-tight">
                       Your Bag
                     </h3>
-                    <span className="text-[11px] font-bold text-[#8a6a50]">
+                    <span className="text-xs text-[#666666]">
                       {items.length} {items.length === 1 ? 'item' : 'items'}
                     </span>
                   </div>
@@ -69,7 +69,7 @@ export const CartDrawer: React.FC = () => {
                 <button
                   type="button"
                   onClick={closeDrawer}
-                  className="rounded-lg p-2 text-[#8a6a50] hover:text-[#1a0a00] hover:bg-[#f0e6d9]/40 transition-colors"
+                  className="rounded-full p-2 text-[#666666] hover:text-[#111111] hover:bg-[#e8e4dd]/50 transition-colors"
                   aria-label="Close cart"
                 >
                   <X className="w-5 h-5" />
@@ -77,17 +77,17 @@ export const CartDrawer: React.FC = () => {
               </header>
 
               {/* Items List or Empty State */}
-              <div className="flex-1 overflow-y-auto p-6 space-y-4 bg-white">
+              <div className="flex-1 overflow-y-auto p-6 space-y-3 bg-[#faf9f6]">
                 {items.length === 0 ? (
                   <div className="flex flex-col items-center justify-center h-full text-center py-12">
-                    <div className="w-16 h-16 rounded-2xl bg-[#fffaf5] border border-[#f0e6d9] flex items-center justify-center text-[#ff4500] mb-4">
-                      <ShoppingBag className="w-8 h-8" />
+                    <div className="w-16 h-16 rounded-full bg-white border border-[#e8e4dd] flex items-center justify-center text-[#666666] mb-4">
+                      <ShoppingBag className="w-7 h-7 stroke-[1.5]" />
                     </div>
-                    <p className="text-lg font-black text-[#1a0a00] uppercase tracking-tight">
-                      Your bag is empty.
+                    <p className="font-serif text-xl text-[#111111] font-normal">
+                      Your bag is empty
                     </p>
-                    <span className="text-sm text-[#8a6a50] mt-1 mb-6">
-                      Add something blazing hot from the menu.
+                    <span className="text-xs text-[#666666] mt-1 mb-6">
+                      Explore our wood-fired pizzas and chef specials.
                     </span>
                     <button
                       type="button"
@@ -95,19 +95,19 @@ export const CartDrawer: React.FC = () => {
                         closeDrawer();
                         navigate('/menu');
                       }}
-                      className="px-6 py-3 rounded-xl bg-[#ff4500] hover:bg-[#e03800] text-white font-extrabold uppercase text-xs tracking-wider transition-all duration-200 shadow-md shadow-[#ff4500]/25"
+                      className="px-6 py-2.5 rounded-full bg-[#111111] hover:bg-[#2d5a27] text-white text-xs font-medium tracking-wide transition-colors"
                     >
-                      Browse the menu
+                      Browse Menu
                     </button>
                   </div>
                 ) : (
                   items.map((item) => (
                     <div
                       key={item.id}
-                      className="flex gap-4 p-3.5 rounded-xl border border-[#f0e6d9] bg-[#fffaf5] transition-colors hover:border-[#ff4500]/40 shadow-sm"
+                      className="flex gap-4 p-3.5 rounded-xl border border-[#e8e4dd] bg-white transition-colors hover:border-[#111111]/30 shadow-xs"
                     >
                       {/* Thumbnail */}
-                      <div className="relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-lg bg-white border border-[#f0e6d9]">
+                      <div className="relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-lg bg-[#faf9f6]">
                         <img
                           src={
                             item.image ||
@@ -122,13 +122,13 @@ export const CartDrawer: React.FC = () => {
                       <div className="flex-1 flex flex-col justify-between">
                         <div>
                           <div className="flex items-start justify-between gap-2">
-                            <h4 className="font-black text-sm uppercase tracking-tight text-[#1a0a00] line-clamp-1">
+                            <h4 className="font-serif text-sm text-[#111111] font-normal line-clamp-1">
                               {item.name}
                             </h4>
                             <button
                               type="button"
                               onClick={() => removeItem(item.id)}
-                              className="text-[#8a6a50] hover:text-red-500 transition-colors p-1"
+                              className="text-[#999999] hover:text-red-500 transition-colors p-1"
                               aria-label="Remove item"
                             >
                               <Trash2 className="w-3.5 h-3.5" />
@@ -137,7 +137,7 @@ export const CartDrawer: React.FC = () => {
 
                           {/* Customization Details if any */}
                           {item.isCustom && item.customization && (
-                            <p className="text-[11px] text-[#8a6a50] line-clamp-1 mt-0.5">
+                            <p className="text-[11px] text-[#666666] line-clamp-1 mt-0.5">
                               {item.customization.base} · {item.customization.sauce} ·{' '}
                               {item.customization.cheese}
                             </p>
@@ -146,27 +146,26 @@ export const CartDrawer: React.FC = () => {
 
                         {/* Price & Stepper */}
                         <div className="flex items-center justify-between mt-2">
-                          <span className="text-sm font-black text-[#1a0a00]">
-                            <span className="text-[#ff4500]">₦</span>
-                            {(item.price * item.quantity).toLocaleString()}
+                          <span className="text-xs font-medium text-[#111111]">
+                            ₦{(item.price * item.quantity).toLocaleString()}
                           </span>
 
-                          <div className="flex items-center gap-2 rounded-lg bg-white border border-[#f0e6d9] px-2 py-1 shadow-xs">
+                          <div className="flex items-center gap-2 rounded-full bg-[#faf9f6] border border-[#e8e4dd] px-2 py-0.5">
                             <button
                               type="button"
                               onClick={() => updateQty(item.id, -1)}
-                              className="text-[#8a6a50] hover:text-[#1a0a00] transition-colors"
+                              className="text-[#666666] hover:text-[#111111] transition-colors"
                               aria-label="Decrease quantity"
                             >
                               <Minus className="w-3 h-3" />
                             </button>
-                            <span className="text-xs font-bold w-4 text-center text-[#1a0a00]">
+                            <span className="text-xs font-medium w-4 text-center text-[#111111]">
                               {item.quantity}
                             </span>
                             <button
                               type="button"
                               onClick={() => updateQty(item.id, 1)}
-                              className="text-[#8a6a50] hover:text-[#1a0a00] transition-colors"
+                              className="text-[#666666] hover:text-[#111111] transition-colors"
                               aria-label="Increase quantity"
                             >
                               <Plus className="w-3 h-3" />
@@ -181,19 +180,19 @@ export const CartDrawer: React.FC = () => {
 
               {/* Footer / Summary */}
               {items.length > 0 && (
-                <footer className="border-t border-[#f0e6d9] bg-[#fffaf5] p-6 space-y-4">
-                  <div className="space-y-1.5 text-xs text-[#8a6a50]">
+                <footer className="border-t border-[#e8e4dd] bg-white p-6 space-y-4">
+                  <div className="space-y-1.5 text-xs text-[#666666]">
                     <div className="flex justify-between">
                       <span>Subtotal</span>
-                      <span className="text-[#1a0a00] font-bold">₦{subtotal.toLocaleString()}</span>
+                      <span className="text-[#111111] font-medium">₦{subtotal.toLocaleString()}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span>Delivery Fee (Flat)</span>
-                      <span className="text-[#1a0a00] font-bold">₦{deliveryFee.toLocaleString()}</span>
+                      <span>Delivery Fee</span>
+                      <span className="text-[#111111] font-medium">₦{deliveryFee.toLocaleString()}</span>
                     </div>
-                    <div className="flex justify-between text-base font-black text-[#1a0a00] pt-2 border-t border-[#f0e6d9]">
+                    <div className="flex justify-between text-sm font-medium text-[#111111] pt-2 border-t border-[#e8e4dd]">
                       <span>Total</span>
-                      <span className="text-[#ff4500]">₦{total.toLocaleString()}</span>
+                      <span className="text-[#111111]">₦{total.toLocaleString()}</span>
                     </div>
                   </div>
 
@@ -201,16 +200,16 @@ export const CartDrawer: React.FC = () => {
                     <button
                       type="button"
                       onClick={handleGoToCart}
-                      className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-[#ff4500] hover:bg-[#e03800] text-white font-extrabold uppercase text-xs tracking-wider transition-all duration-200 shadow-lg shadow-[#ff4500]/25 active:scale-95 cursor-pointer"
+                      className="w-full flex items-center justify-center gap-2 py-3 rounded-full bg-[#111111] hover:bg-[#2d5a27] text-white text-xs font-medium tracking-wide transition-colors cursor-pointer"
                     >
-                      <span>Proceed to Checkout</span>
-                      <ArrowRight className="w-4 h-4" />
+                      <span>Checkout</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
                     </button>
 
                     <button
                       type="button"
                       onClick={closeDrawer}
-                      className="w-full py-2.5 rounded-xl text-[#8a6a50] hover:text-[#1a0a00] font-bold uppercase text-[11px] tracking-wider transition-colors text-center"
+                      className="w-full py-2 text-[#666666] hover:text-[#111111] text-xs transition-colors text-center"
                     >
                       Continue Shopping
                     </button>

@@ -19,29 +19,29 @@ export const BuilderCard: React.FC<BuilderCardProps> = ({
   return (
     <motion.button
       type="button"
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
+      whileHover={{ scale: 1.01 }}
+      whileTap={{ scale: 0.99 }}
       onClick={onSelect}
-      className={`relative flex flex-col text-left overflow-hidden rounded-2xl border p-4 transition-all duration-300 w-full cursor-pointer shadow-sm ${
+      className={`relative flex flex-col text-left overflow-hidden rounded-2xl border p-4 transition-all duration-200 w-full cursor-pointer ${
         isSelected
-          ? 'border-[#ff4500] bg-[#fff5f0] shadow-[0_0_20px_rgba(255,69,0,0.18)] ring-1 ring-[#ff4500]'
-          : 'border-[#f0e6d9] bg-white hover:border-[#ff4500]/50 hover:bg-[#fffaf5]'
+          ? 'border-[#111111] bg-[#f5f2ed] shadow-xs'
+          : 'border-[#e8e4dd] bg-white hover:border-[#111111]/40'
       }`}
     >
       {/* Selection check indicator */}
       <div
-        className={`absolute top-3 right-3 z-10 flex h-6 w-6 items-center justify-center rounded-full transition-all ${
+        className={`absolute top-3.5 right-3.5 z-10 flex h-5 w-5 items-center justify-center rounded-full transition-all ${
           isSelected
-            ? 'bg-[#ff4500] text-white shadow-md'
-            : 'border border-[#f0e6d9] bg-white text-transparent'
+            ? 'bg-[#111111] text-white'
+            : 'border border-[#e8e4dd] bg-white text-transparent'
         }`}
       >
-        <Check className="h-3.5 w-3.5 stroke-[3]" />
+        <Check className="h-3 w-3 stroke-[2.5]" />
       </div>
 
       {/* Option Image if present */}
       {option.image && (
-        <div className="relative mb-3 h-32 w-full overflow-hidden rounded-xl bg-[#fffaf5] border border-[#f0e6d9]">
+        <div className="relative mb-3 h-28 w-full overflow-hidden rounded-xl bg-[#faf9f6]">
           <img
             src={option.image}
             alt={option.name}
@@ -56,8 +56,8 @@ export const BuilderCard: React.FC<BuilderCardProps> = ({
         <div>
           <div className="flex items-center justify-between gap-2 pr-6">
             <h4
-              className={`font-black text-base md:text-lg uppercase tracking-tight transition-colors ${
-                isSelected ? 'text-[#ff4500]' : 'text-[#1a0a00]'
+              className={`font-serif text-base font-normal tracking-tight transition-colors ${
+                isSelected ? 'text-[#111111] font-medium' : 'text-[#111111]'
               }`}
             >
               {option.name}
@@ -65,22 +65,18 @@ export const BuilderCard: React.FC<BuilderCardProps> = ({
           </div>
 
           {option.description && (
-            <p className="text-xs text-[#8a6a50] mt-1 line-clamp-2 leading-relaxed">
+            <p className="text-xs text-[#666666] mt-1 line-clamp-2 leading-relaxed">
               {option.description}
             </p>
           )}
         </div>
 
         {/* Price modifier tag */}
-        <div className="mt-3 flex items-center justify-between pt-2 border-t border-[#f0e6d9]">
-          <span className="text-[10px] uppercase font-bold tracking-widest text-[#8a6a50]">
+        <div className="mt-3 flex items-center justify-between pt-2 border-t border-[#e8e4dd]">
+          <span className="text-[10px] uppercase tracking-wider text-[#888888]">
             {isMultiSelect ? 'Topping' : 'Option'}
           </span>
-          <span
-            className={`text-xs font-black uppercase ${
-              option.priceModifier > 0 ? 'text-[#ff4500]' : 'text-[#8a6a50]'
-            }`}
-          >
+          <span className="text-xs font-medium text-[#111111]">
             {option.priceModifier > 0 ? `+₦${option.priceModifier.toLocaleString()}` : 'Included'}
           </span>
         </div>

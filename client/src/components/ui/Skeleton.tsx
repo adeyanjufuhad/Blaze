@@ -7,14 +7,14 @@ interface SkeletonProps {
 export const Skeleton: React.FC<SkeletonProps> = ({ className = '' }) => {
   return (
     <div
-      className={`animate-pulse rounded-lg bg-[#f0e6d9]/70 border border-[#f0e6d9] ${className}`}
+      className={`animate-pulse rounded-lg bg-[#e8e4dd]/70 border border-[#e8e4dd] ${className}`}
     />
   );
 };
 
 export const PizzaCardSkeleton: React.FC = () => {
   return (
-    <div className="rounded-2xl border border-[#f0e6d9] bg-white overflow-hidden p-4 space-y-4 shadow-sm">
+    <div className="rounded-2xl border border-[#e8e4dd] bg-white overflow-hidden p-4 space-y-4 shadow-xs">
       <Skeleton className="w-full h-52 rounded-xl" />
       <div className="space-y-2">
         <Skeleton className="w-3/4 h-6" />

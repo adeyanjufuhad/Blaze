@@ -21,12 +21,12 @@ export const StepIndicator: React.FC<StepIndicatorProps> = ({
   return (
     <div className="w-full py-4">
       {/* Mobile view */}
-      <div className="flex md:hidden items-center justify-between bg-white px-4 py-3 rounded-xl border border-[#f0e6d9] shadow-sm">
+      <div className="flex md:hidden items-center justify-between bg-white px-4 py-3 rounded-xl border border-[#e8e4dd] shadow-xs">
         <div>
-          <span className="text-[10px] font-black tracking-widest text-[#ff4500] uppercase">
+          <span className="text-[10px] font-medium tracking-widest text-[#666666] uppercase">
             Step {currentStep} of 4
           </span>
-          <h4 className="text-base font-black text-[#1a0a00] uppercase tracking-tight">
+          <h4 className="font-serif text-base text-[#111111] font-normal">
             {steps[currentStep - 1].title}
           </h4>
         </div>
@@ -34,12 +34,12 @@ export const StepIndicator: React.FC<StepIndicatorProps> = ({
           {steps.map((s) => (
             <div
               key={s.step}
-              className={`h-2 rounded-full transition-all duration-300 ${
+              className={`h-1.5 rounded-full transition-all duration-300 ${
                 s.step === currentStep
-                  ? 'w-6 bg-[#ff4500]'
+                  ? 'w-6 bg-[#111111]'
                   : s.step < currentStep
-                  ? 'w-2 bg-emerald-500'
-                  : 'w-2 bg-[#f0e6d9]'
+                  ? 'w-2 bg-[#2d5a27]'
+                  : 'w-2 bg-[#e8e4dd]'
               }`}
             />
           ))}
@@ -58,35 +58,35 @@ export const StepIndicator: React.FC<StepIndicatorProps> = ({
               type="button"
               disabled={!isCompleted && !isActive}
               onClick={() => isCompleted && onStepClick && onStepClick(s.step)}
-              className={`group flex items-center gap-3 p-3.5 rounded-xl border text-left transition-all duration-200 shadow-sm ${
+              className={`group flex items-center gap-3 p-3.5 rounded-xl border text-left transition-all duration-200 ${
                 isActive
-                  ? 'border-[#ff4500] bg-[#fff5f0] shadow-[0_0_15px_rgba(255,69,0,0.15)] ring-1 ring-[#ff4500]'
+                  ? 'border-[#111111] bg-[#f5f2ed] shadow-xs'
                   : isCompleted
-                  ? 'border-[#f0e6d9] bg-white hover:border-[#ff4500]/50 cursor-pointer'
-                  : 'border-[#f0e6d9] bg-[#fffaf5] opacity-50 cursor-not-allowed'
+                  ? 'border-[#e8e4dd] bg-white hover:border-[#111111]/40 cursor-pointer'
+                  : 'border-[#e8e4dd] bg-[#faf9f6] opacity-50 cursor-not-allowed'
               }`}
             >
               <div
-                className={`flex h-8 w-8 items-center justify-center rounded-lg font-black text-xs transition-colors flex-shrink-0 ${
+                className={`flex h-7 w-7 items-center justify-center rounded-full text-xs font-medium transition-colors flex-shrink-0 ${
                   isActive
-                    ? 'bg-[#ff4500] text-white'
+                    ? 'bg-[#111111] text-white'
                     : isCompleted
-                    ? 'bg-emerald-600 text-white'
-                    : 'bg-[#f0e6d9] text-[#8a6a50]'
+                    ? 'bg-[#2d5a27] text-white'
+                    : 'bg-[#e8e4dd] text-[#666666]'
                 }`}
               >
-                {isCompleted ? <Check className="w-4 h-4 stroke-[3]" /> : s.step}
+                {isCompleted ? <Check className="w-3.5 h-3.5 stroke-[2.5]" /> : s.step}
               </div>
 
               <div className="overflow-hidden">
                 <div
-                  className={`text-xs font-black uppercase tracking-tight transition-colors line-clamp-1 ${
-                    isActive ? 'text-[#ff4500]' : 'text-[#1a0a00]'
+                  className={`text-xs font-medium tracking-tight transition-colors line-clamp-1 ${
+                    isActive ? 'text-[#111111] font-semibold' : 'text-[#111111]'
                   }`}
                 >
                   {s.title}
                 </div>
-                <div className="text-[11px] text-[#8a6a50] font-medium">
+                <div className="text-[11px] text-[#666666]">
                   {s.subtitle}
                 </div>
               </div>

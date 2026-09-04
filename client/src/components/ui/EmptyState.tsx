@@ -23,17 +23,17 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
 }) => {
   return (
     <div
-      className={`flex flex-col items-center justify-center p-8 md:p-12 text-center rounded-2xl border border-[#f0e6d9] bg-white shadow-sm ${className}`}
+      className={`flex flex-col items-center justify-center p-8 md:p-12 text-center rounded-2xl border border-[#e8e4dd] bg-white ${className}`}
     >
-      <div className="w-16 h-16 rounded-2xl bg-[#fffaf5] border border-[#f0e6d9] flex items-center justify-center text-[#ff4500] mb-5 shadow-xs">
-        <Icon className="w-8 h-8" />
+      <div className="w-14 h-14 rounded-full bg-[#faf9f6] border border-[#e8e4dd] flex items-center justify-center text-[#666666] mb-5">
+        <Icon className="w-6 h-6 stroke-[1.5]" />
       </div>
 
-      <h3 className="text-xl md:text-2xl font-black text-[#1a0a00] tracking-tight uppercase mb-2">
+      <h3 className="font-serif text-xl md:text-2xl font-normal text-[#111111] tracking-tight mb-2">
         {title}
       </h3>
 
-      <p className="text-sm md:text-base text-[#8a6a50] max-w-md mb-6 leading-relaxed">
+      <p className="text-xs md:text-sm text-[#666666] max-w-md mb-6 leading-relaxed">
         {description}
       </p>
 
@@ -41,7 +41,7 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
         actionLink ? (
           <Link
             to={actionLink}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#ff4500] hover:bg-[#e03800] text-white font-extrabold uppercase text-xs tracking-wider transition-all duration-200 shadow-md shadow-[#ff4500]/25 hover:shadow-[#ff4500]/40 active:scale-95"
+            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#111111] hover:bg-[#2d5a27] text-white text-xs font-medium tracking-wide transition-colors"
           >
             {actionText}
           </Link>
@@ -49,7 +49,7 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
           <button
             type="button"
             onClick={onAction}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#ff4500] hover:bg-[#e03800] text-white font-extrabold uppercase text-xs tracking-wider transition-all duration-200 shadow-md shadow-[#ff4500]/25 hover:shadow-[#ff4500]/40 active:scale-95"
+            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#111111] hover:bg-[#2d5a27] text-white text-xs font-medium tracking-wide transition-colors cursor-pointer"
           >
             {actionText}
           </button>

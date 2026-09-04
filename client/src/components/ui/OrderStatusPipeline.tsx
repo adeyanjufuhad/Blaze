@@ -44,11 +44,11 @@ export const OrderStatusPipeline: React.FC<OrderStatusPipelineProps> = ({
     <div className={`w-full py-4 select-none ${className}`}>
       <div className="relative flex items-center justify-between">
         {/* Continuous background bar */}
-        <div className="absolute top-1/2 left-0 right-0 -translate-y-1/2 h-1 bg-[#f0e6d9] z-0" />
+        <div className="absolute top-1/2 left-0 right-0 -translate-y-1/2 h-0.5 bg-[#e8e4dd] z-0" />
 
         {/* Dynamic active progress bar */}
         <motion.div
-          className="absolute top-1/2 left-0 -translate-y-1/2 h-1 bg-gradient-to-r from-[#ff4500] to-[#ff6b35] z-0"
+          className="absolute top-1/2 left-0 -translate-y-1/2 h-0.5 bg-[#111111] z-0"
           initial={{ width: '0%' }}
           animate={{
             width: `${(currentIndex / (pipelineSteps.length - 1)) * 100}%`,
@@ -68,47 +68,35 @@ export const OrderStatusPipeline: React.FC<OrderStatusPipelineProps> = ({
               className="relative z-10 flex flex-col items-center group"
             >
               {/* Dot / Icon Circle */}
-              <motion.div
-                initial={false}
-                animate={
+              <div
+                className={`flex h-9 w-9 md:h-10 md:w-10 items-center justify-center rounded-full border transition-all duration-300 ${
                   isActive
-                    ? { scale: [1, 1.12, 1], boxShadow: '0 0 18px rgba(255, 69, 0, 0.5)' }
-                    : { scale: 1, boxShadow: 'none' }
-                }
-                transition={isActive ? { repeat: Infinity, duration: 2 } : {}}
-                className={`flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-full border-2 transition-all duration-300 ${
-                  isActive
-                    ? 'border-[#ff4500] bg-[#ff4500] text-white shadow-md'
+                    ? 'border-[#111111] bg-[#111111] text-white'
                     : isDone
-                    ? 'border-emerald-500 bg-emerald-600 text-white'
-                    : 'border-[#f0e6d9] bg-white text-[#8a6a50]'
+                    ? 'border-[#2d5a27] bg-[#2d5a27] text-white'
+                    : 'border-[#e8e4dd] bg-white text-[#888888]'
                 }`}
               >
                 {isDone ? (
-                  <Check className="h-5 w-5 stroke-[3]" />
+                  <Check className="h-4 w-4 stroke-[2.5]" />
                 ) : (
-                  <Icon className="h-4 w-4 md:h-5 md:w-5" />
+                  <Icon className="h-4 w-4 stroke-[1.8]" />
                 )}
-              </motion.div>
+              </div>
 
               {/* Label */}
-              <div className="absolute top-12 md:top-14 text-center whitespace-nowrap">
+              <div className="absolute top-11 md:top-12 text-center whitespace-nowrap">
                 <span
-                  className={`text-[10px] md:text-xs font-black uppercase tracking-tight ${
+                  className={`text-[10px] md:text-xs font-medium tracking-wide ${
                     isActive
-                      ? 'text-[#ff4500]'
+                      ? 'text-[#111111] font-semibold'
                       : isDone
-                      ? 'text-[#1a0a00]'
-                      : 'text-[#8a6a50]'
+                      ? 'text-[#2d5a27]'
+                      : 'text-[#888888]'
                   }`}
                 >
                   {step.label}
                 </span>
-                {isActive && (
-                  <span className="block text-[9px] font-bold text-[#ff6b35] animate-pulse">
-                    Live Progress
-                  </span>
-                )}
               </div>
             </div>
           );

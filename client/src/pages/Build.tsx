@@ -129,14 +129,14 @@ export const Build: React.FC = () => {
   const totalCalculated = calculateTotal();
 
   return (
-    <div className="min-h-screen bg-[#fffaf5] py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <div className="min-h-screen bg-[#faf9f6] py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       {/* Title */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
         <div>
-          <span className="text-xs font-black uppercase tracking-widest text-[#ff4500]">
+          <span className="text-xs font-medium tracking-widest text-[#666666] uppercase">
             Custom Pizza Studio
           </span>
-          <h1 className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-[#1a0a00] mt-1">
+          <h1 className="font-serif text-3xl sm:text-5xl font-normal tracking-tight text-[#111111] mt-1">
             Build Your Pizza
           </h1>
         </div>
@@ -144,7 +144,7 @@ export const Build: React.FC = () => {
         <button
           type="button"
           onClick={resetBuilder}
-          className="self-start md:self-auto inline-flex items-center gap-2 px-3.5 py-2 rounded-xl border border-[#f0e6d9] bg-white text-xs font-bold text-[#8a6a50] hover:text-[#1a0a00] hover:border-[#ff4500] shadow-sm transition-colors"
+          className="self-start md:self-auto inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#e8e4dd] bg-white text-xs font-medium text-[#666666] hover:text-[#111111] hover:border-[#111111] transition-colors cursor-pointer"
         >
           <RotateCcw className="w-3.5 h-3.5" />
           <span>Reset Selections</span>
@@ -170,10 +170,10 @@ export const Build: React.FC = () => {
                 className="space-y-6"
               >
                 <div>
-                  <h3 className="text-xl font-black uppercase tracking-tight text-[#1a0a00]">
+                  <h3 className="font-serif text-xl font-normal text-[#111111]">
                     Step 1: Choose Your Base Crust
                   </h3>
-                  <p className="text-sm text-[#8a6a50] mt-1">
+                  <p className="text-xs text-[#666666] mt-1">
                     Select the foundational dough for your pizza.
                   </p>
                 </div>
@@ -202,10 +202,10 @@ export const Build: React.FC = () => {
                 className="space-y-6"
               >
                 <div>
-                  <h3 className="text-xl font-black uppercase tracking-tight text-[#1a0a00]">
+                  <h3 className="font-serif text-xl font-normal text-[#111111]">
                     Step 2: Choose Your Sauce
                   </h3>
-                  <p className="text-sm text-[#8a6a50] mt-1">
+                  <p className="text-xs text-[#666666] mt-1">
                     Pick your signature sauce base simmered to perfection.
                   </p>
                 </div>
@@ -234,10 +234,10 @@ export const Build: React.FC = () => {
                 className="space-y-6"
               >
                 <div>
-                  <h3 className="text-xl font-black uppercase tracking-tight text-[#1a0a00]">
+                  <h3 className="font-serif text-xl font-normal text-[#111111]">
                     Step 3: Choose Your Cheese
                   </h3>
-                  <p className="text-sm text-[#8a6a50] mt-1">
+                  <p className="text-xs text-[#666666] mt-1">
                     Select your melting layer of dairy or plant-based indulgence.
                   </p>
                 </div>
@@ -267,14 +267,14 @@ export const Build: React.FC = () => {
               >
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <div>
-                    <h3 className="text-xl font-black uppercase tracking-tight text-[#1a0a00]">
+                    <h3 className="font-serif text-xl font-normal text-[#111111]">
                       Step 4: Choose Vegetables
                     </h3>
-                    <p className="text-sm text-[#8a6a50] mt-1">
+                    <p className="text-xs text-[#666666] mt-1">
                       Multi-select fresh farm toppings (Minimum 1, Maximum 6).
                     </p>
                   </div>
-                  <span className="px-3 py-1 rounded-full bg-[#fff5f0] border border-[#ff4500]/30 text-xs font-bold text-[#ff4500] self-start">
+                  <span className="px-3 py-1 rounded-full bg-[#f5f2ed] border border-[#e8e4dd] text-xs font-medium text-[#111111] self-start">
                     {selections.vegetables.length}/6 Selected
                   </span>
                 </div>
@@ -300,19 +300,19 @@ export const Build: React.FC = () => {
           </AnimatePresence>
 
           {/* Navigation Controls */}
-          <div className="flex items-center justify-between pt-8 border-t border-[#f0e6d9] mt-8">
+          <div className="flex items-center justify-between pt-8 border-t border-[#e8e4dd] mt-8">
             <button
               type="button"
               disabled={currentStep === 1}
               onClick={prevStep}
-              className={`flex items-center gap-2 px-5 py-3 rounded-xl border text-xs font-black uppercase tracking-wider transition-colors ${
+              className={`flex items-center gap-2 px-5 py-2.5 rounded-full border text-xs font-medium tracking-wide transition-colors ${
                 currentStep === 1
-                  ? 'opacity-40 cursor-not-allowed bg-transparent text-[#8a6a50] border-[#f0e6d9]'
-                  : 'bg-white text-[#1a0a00] border-[#f0e6d9] hover:bg-[#fff5f0] shadow-sm'
+                  ? 'opacity-40 cursor-not-allowed bg-transparent text-[#888888] border-[#e8e4dd]'
+                  : 'bg-white text-[#111111] border-[#e8e4dd] hover:border-[#111111]'
               }`}
             >
-              <ArrowLeft className="w-4 h-4" />
-              <span>Previous Step</span>
+              <ArrowLeft className="w-3.5 h-3.5" />
+              <span>Previous</span>
             </button>
 
             {currentStep < 4 ? (
@@ -320,27 +320,27 @@ export const Build: React.FC = () => {
                 type="button"
                 disabled={!canProceedToNextStep()}
                 onClick={nextStep}
-                className={`flex items-center gap-2 px-6 py-3 rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-200 shadow-lg ${
+                className={`flex items-center gap-2 px-6 py-2.5 rounded-full text-xs font-medium tracking-wide transition-all ${
                   canProceedToNextStep()
-                    ? 'bg-[#ff4500] text-white hover:bg-[#e03800] shadow-[#ff4500]/30 active:scale-95'
-                    : 'bg-[#f0e6d9] text-[#8a6a50] cursor-not-allowed shadow-none'
+                    ? 'bg-[#111111] text-white hover:bg-[#2d5a27] cursor-pointer'
+                    : 'bg-[#e8e4dd] text-[#888888] cursor-not-allowed'
                 }`}
               >
                 <span>Continue to Step {currentStep + 1}</span>
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight className="w-3.5 h-3.5" />
               </button>
             ) : (
               <button
                 type="button"
                 disabled={selections.vegetables.length < 1}
                 onClick={handleAddToCart}
-                className={`flex items-center gap-2 px-8 py-3.5 rounded-xl text-xs font-black uppercase tracking-wider transition-all duration-200 shadow-xl ${
+                className={`flex items-center gap-2 px-6 py-2.5 rounded-full text-xs font-medium tracking-wide transition-all ${
                   selections.vegetables.length >= 1
-                    ? 'bg-[#ff4500] text-white hover:bg-[#e03800] shadow-[#ff4500]/40 active:scale-95'
-                    : 'bg-[#f0e6d9] text-[#8a6a50] cursor-not-allowed shadow-none'
+                    ? 'bg-[#111111] text-white hover:bg-[#2d5a27] cursor-pointer'
+                    : 'bg-[#e8e4dd] text-[#888888] cursor-not-allowed'
                 }`}
               >
-                <ShoppingBag className="w-4 h-4" />
+                <ShoppingBag className="w-3.5 h-3.5" />
                 <span>Add Custom Pizza to Bag</span>
               </button>
             )}
@@ -349,13 +349,12 @@ export const Build: React.FC = () => {
 
         {/* Live Order Summary Sidebar */}
         <div className="lg:col-span-4">
-          <div className="sticky top-28 rounded-2xl border border-[#f0e6d9] bg-white p-6 space-y-6 shadow-blaze-card">
-            <div className="flex items-center justify-between border-b border-[#f0e6d9] pb-4">
-              <h3 className="font-black text-lg uppercase tracking-tight text-[#1a0a00] flex items-center gap-2">
-                <Flame className="w-5 h-5 text-[#ff4500]" />
-                <span>Live Pizza Summary</span>
+          <div className="sticky top-28 rounded-2xl border border-[#e8e4dd] bg-white p-6 space-y-6">
+            <div className="flex items-center justify-between border-b border-[#e8e4dd] pb-4">
+              <h3 className="font-serif text-lg text-[#111111] font-normal">
+                Live Pizza Summary
               </h3>
-              <span className="text-xs font-extrabold uppercase px-2.5 py-1 rounded bg-[#fff5f0] text-[#ff4500] border border-[#ff4500]/20">
+              <span className="text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-[#faf9f6] text-[#666666] border border-[#e8e4dd]">
                 Step {currentStep}/4
               </span>
             </div>
@@ -363,14 +362,14 @@ export const Build: React.FC = () => {
             {/* Visual breakdown */}
             <div className="space-y-4 text-xs">
               {/* Base */}
-              <div className="flex justify-between items-center pb-2 border-b border-[#f0e6d9]">
+              <div className="flex justify-between items-center pb-2 border-b border-[#e8e4dd]">
                 <div>
-                  <span className="text-[#8a6a50] uppercase font-black block">Base Crust</span>
-                  <span className="font-bold text-[#1a0a00] text-sm">
+                  <span className="text-[#888888] uppercase text-[10px] tracking-wider block">Base Crust</span>
+                  <span className="font-medium text-[#111111]">
                     {selections.base ? selections.base.name : 'Not chosen yet'}
                   </span>
                 </div>
-                <span className="font-extrabold text-[#8a6a50]">
+                <span className="text-[#666666]">
                   {selections.base && selections.base.priceModifier > 0
                     ? `+₦${selections.base.priceModifier}`
                     : '₦0'}
@@ -378,14 +377,14 @@ export const Build: React.FC = () => {
               </div>
 
               {/* Sauce */}
-              <div className="flex justify-between items-center pb-2 border-b border-[#f0e6d9]">
+              <div className="flex justify-between items-center pb-2 border-b border-[#e8e4dd]">
                 <div>
-                  <span className="text-[#8a6a50] uppercase font-black block">Sauce</span>
-                  <span className="font-bold text-[#1a0a00] text-sm">
+                  <span className="text-[#888888] uppercase text-[10px] tracking-wider block">Sauce</span>
+                  <span className="font-medium text-[#111111]">
                     {selections.sauce ? selections.sauce.name : 'Not chosen yet'}
                   </span>
                 </div>
-                <span className="font-extrabold text-[#8a6a50]">
+                <span className="text-[#666666]">
                   {selections.sauce && selections.sauce.priceModifier > 0
                     ? `+₦${selections.sauce.priceModifier}`
                     : '₦0'}
@@ -393,14 +392,14 @@ export const Build: React.FC = () => {
               </div>
 
               {/* Cheese */}
-              <div className="flex justify-between items-center pb-2 border-b border-[#f0e6d9]">
+              <div className="flex justify-between items-center pb-2 border-b border-[#e8e4dd]">
                 <div>
-                  <span className="text-[#8a6a50] uppercase font-black block">Cheese</span>
-                  <span className="font-bold text-[#1a0a00] text-sm">
+                  <span className="text-[#888888] uppercase text-[10px] tracking-wider block">Cheese</span>
+                  <span className="font-medium text-[#111111]">
                     {selections.cheese ? selections.cheese.name : 'Not chosen yet'}
                   </span>
                 </div>
-                <span className="font-extrabold text-[#8a6a50]">
+                <span className="text-[#666666]">
                   {selections.cheese && selections.cheese.priceModifier > 0
                     ? `+₦${selections.cheese.priceModifier}`
                     : '₦0'}
@@ -408,12 +407,12 @@ export const Build: React.FC = () => {
               </div>
 
               {/* Vegetables */}
-              <div className="pb-2 border-b border-[#f0e6d9]">
+              <div className="pb-2 border-b border-[#e8e4dd]">
                 <div className="flex justify-between items-center mb-1">
-                  <span className="text-[#8a6a50] uppercase font-black block">
+                  <span className="text-[#888888] uppercase text-[10px] tracking-wider block">
                     Vegetables ({selections.vegetables.length})
                   </span>
-                  <span className="text-[#8a6a50] font-extrabold">
+                  <span className="text-[#666666]">
                     +₦
                     {selections.vegetables
                       .reduce((sum, v) => sum + v.priceModifier, 0)
@@ -425,29 +424,29 @@ export const Build: React.FC = () => {
                     {selections.vegetables.map((v) => (
                       <span
                         key={v._id}
-                        className="px-2 py-0.5 rounded bg-[#fff5f0] border border-[#f0e6d9] text-[11px] font-bold text-[#1a0a00]"
+                        className="px-2.5 py-0.5 rounded-full bg-[#faf9f6] border border-[#e8e4dd] text-[11px] text-[#111111]"
                       >
                         {v.name}
                       </span>
                     ))}
                   </div>
                 ) : (
-                  <span className="text-[#8a6a50]/70 italic">None selected yet (min 1)</span>
+                  <span className="text-[#888888] italic text-[11px]">None selected yet (min 1)</span>
                 )}
               </div>
             </div>
 
             {/* Total computation */}
             <div className="pt-2">
-              <div className="flex justify-between items-center text-xs text-[#8a6a50] mb-1">
+              <div className="flex justify-between items-center text-xs text-[#666666] mb-1">
                 <span>Base Price</span>
                 <span>₦{basePrice.toLocaleString()}</span>
               </div>
-              <div className="flex justify-between items-baseline pt-3 border-t border-[#f0e6d9]">
-                <span className="text-base font-black uppercase tracking-tight text-[#1a0a00]">
+              <div className="flex justify-between items-baseline pt-3 border-t border-[#e8e4dd]">
+                <span className="text-sm font-medium text-[#111111]">
                   Total Pizza
                 </span>
-                <span className="text-2xl font-black text-[#ff4500]">
+                <span className="text-xl font-serif text-[#111111]">
                   ₦{totalCalculated.toLocaleString()}
                 </span>
               </div>
@@ -459,7 +458,7 @@ export const Build: React.FC = () => {
                 type="button"
                 disabled={selections.vegetables.length < 1}
                 onClick={handleAddToCart}
-                className="w-full py-3.5 rounded-xl bg-[#ff4500] hover:bg-[#e03800] text-white font-black uppercase text-xs tracking-wider transition-all duration-200 shadow-lg shadow-[#ff4500]/30 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full py-3 rounded-full bg-[#111111] hover:bg-[#2d5a27] text-white font-medium text-xs tracking-wide transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
               >
                 Add to Bag · ₦{totalCalculated.toLocaleString()}
               </button>

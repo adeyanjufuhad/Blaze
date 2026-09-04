@@ -14,85 +14,70 @@ export const Logo: React.FC<LogoProps> = ({
   showSubtext = true,
   size = 'md',
   isLink = true,
-  darkText = false,
+  darkText = true,
 }) => {
   const iconSizes = {
-    sm: 'w-8 h-8',
-    md: 'w-10 h-10',
-    lg: 'w-12 h-12',
-    xl: 'w-16 h-16',
+    sm: 'w-7 h-7',
+    md: 'w-8 h-8',
+    lg: 'w-10 h-10',
+    xl: 'w-12 h-12',
   };
 
   const textSizes = {
-    sm: 'text-xl',
-    md: 'text-2xl',
-    lg: 'text-3xl',
-    xl: 'text-4xl',
+    sm: 'text-lg',
+    md: 'text-xl',
+    lg: 'text-2xl',
+    xl: 'text-3xl',
   };
 
   const subtextSizes = {
-    sm: 'text-[9px] tracking-[0.2em]',
-    md: 'text-[10px] tracking-[0.22em]',
-    lg: 'text-[11px] tracking-[0.25em]',
-    xl: 'text-xs tracking-[0.3em]',
+    sm: 'text-[8px] tracking-[0.2em]',
+    md: 'text-[9px] tracking-[0.22em]',
+    lg: 'text-[10px] tracking-[0.25em]',
+    xl: 'text-[11px] tracking-[0.28em]',
   };
 
+  const isDarkBg = !darkText;
+
   const content = (
-    <div className={`flex items-center gap-3 select-none group ${className}`}>
-      {/* Orange-red rounded square with white flame icon above faint pizza ellipse */}
+    <div className={`flex items-center gap-2.5 select-none group ${className}`}>
+      {/* Sleek minimal flame pill mark */}
       <div
-        className={`${iconSizes[size]} relative flex-shrink-0 rounded-xl bg-gradient-to-br from-[#ff4500] to-[#e03800] p-1.5 shadow-lg shadow-[#ff4500]/30 transition-transform duration-300 group-hover:scale-105 group-hover:shadow-[#ff4500]/50`}
+        className={`${iconSizes[size]} relative flex-shrink-0 rounded-lg ${
+          isDarkBg ? 'bg-white text-[#111111]' : 'bg-[#111111] text-white'
+        } p-1.5 flex items-center justify-center transition-transform duration-300 group-hover:scale-105`}
       >
         <svg
-          viewBox="0 0 100 100"
+          viewBox="0 0 24 24"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
           className="w-full h-full"
         >
-          {/* Faint pizza ellipse */}
-          <ellipse
-            cx="50"
-            cy="76"
-            rx="38"
-            ry="11"
-            fill="#ffffff"
-            fillOpacity="0.22"
-          />
-          <ellipse
-            cx="50"
-            cy="76"
-            rx="30"
-            ry="7"
-            fill="#ffffff"
-            fillOpacity="0.3"
-          />
-
-          {/* White flame icon */}
-          <path
-            d="M50 14 C43 28 32 37 32 54 C32 67 40 76 50 76 C60 76 68 67 68 54 C68 40 60 30 55 24 C54 30 52 34 49 37 C48 30 49 22 50 14 Z"
-            fill="#ffffff"
-          />
-          {/* Inner core flame accent */}
-          <path
-            d="M50 44 C46 50 43 54 43 62 C43 68 46 71 50 71 C54 71 57 68 57 62 C57 56 54 51 50 44 Z"
-            fill="#ffcc00"
-          />
+          <path d="M8.5 14.5A2.5 2.5 0 0 0 11 17c1.38 0 2.5-1.12 2.5-2.5 0-1.63-1.04-2.5-2.5-4-1.46 1.5-2.5 2.37-2.5 4z" fill="currentColor" />
+          <path d="M12 2c-3 4-6 7.5-6 12a6 6 0 0 0 12 0c0-4.5-3-8-6-12z" />
         </svg>
       </div>
 
       {/* Typography */}
       <div className="flex flex-col justify-center leading-none">
         <span
-          className={`font-black ${darkText ? 'text-[#1a0a00]' : 'text-white'} ${textSizes[size]} tracking-tighter uppercase`}
-          style={{ letterSpacing: '-0.05em' }}
+          className={`font-serif tracking-tight ${
+            isDarkBg ? 'text-[#faf9f6]' : 'text-[#111111]'
+          } ${textSizes[size]}`}
+          style={{ letterSpacing: '-0.02em' }}
         >
-          BLAZE
+          Blaze
         </span>
         {showSubtext && (
           <span
-            className={`font-extrabold text-[#ff4500] uppercase ${subtextSizes[size]} mt-0.5`}
+            className={`font-medium ${
+              isDarkBg ? 'text-[#a39e93]' : 'text-[#666666]'
+            } uppercase ${subtextSizes[size]} mt-0.5`}
           >
-            PIZZA · DELIVERED
+            Wood-Fired
           </span>
         )}
       </div>
@@ -101,7 +86,7 @@ export const Logo: React.FC<LogoProps> = ({
 
   if (isLink) {
     return (
-      <Link to="/" className="inline-block outline-none focus-visible:ring-2 focus-visible:ring-[#ff4500] rounded-lg">
+      <Link to="/" className="inline-block outline-none focus-visible:ring-2 focus-visible:ring-[#111111] rounded-lg">
         {content}
       </Link>
     );

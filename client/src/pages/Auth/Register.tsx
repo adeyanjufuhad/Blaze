@@ -81,39 +81,39 @@ export const Register: React.FC = () => {
   };
 
   return (
-    <div className="min-h-[90vh] flex items-center justify-center bg-[#fffaf5] px-4 py-16">
-      <div className="max-w-md w-full rounded-3xl border border-[#f0e6d9] bg-white p-8 sm:p-10 shadow-blaze-card space-y-6">
+    <div className="min-h-[90vh] flex items-center justify-center bg-[#faf9f6] px-4 py-16">
+      <div className="max-w-md w-full rounded-3xl border border-[#e8e4dd] bg-white p-8 sm:p-10 shadow-xs space-y-6">
         <div className="text-center space-y-2">
           <div className="flex justify-center mb-4">
             <Logo size="md" isLink={false} darkText={true} />
           </div>
-          <h1 className="text-2xl sm:text-3xl font-black uppercase tracking-tight text-[#1a0a00]">
+          <h1 className="font-serif text-2xl sm:text-3xl font-normal tracking-tight text-[#111111]">
             Create an Account
           </h1>
-          <p className="text-xs text-[#8a6a50]">
+          <p className="text-xs text-[#666666]">
             Join Blaze for artisan pizzas, live delivery tracking, and fast ordering.
           </p>
         </div>
 
         {isSuccess ? (
           <div className="text-center space-y-4 py-4">
-            <div className="w-16 h-16 rounded-full bg-emerald-500/15 border border-emerald-500 flex items-center justify-center text-emerald-600 mx-auto">
+            <div className="w-16 h-16 rounded-full bg-[#2d5a27]/10 border border-[#2d5a27]/30 flex items-center justify-center text-[#2d5a27] mx-auto">
               <Mail className="w-8 h-8" />
             </div>
 
-            <h3 className="text-lg font-black uppercase tracking-tight text-[#1a0a00]">
+            <h3 className="font-serif text-lg font-normal tracking-tight text-[#111111]">
               Verify Your Email
             </h3>
 
-            <p className="text-sm text-[#8a6a50] leading-relaxed">
-              We sent a verification link to <strong className="text-[#1a0a00]">{registeredEmail}</strong>. Click the link in your email to activate your account.
+            <p className="text-xs text-[#666666] leading-relaxed">
+              We sent a verification link to <strong className="text-[#111111]">{registeredEmail}</strong>. Click the link in your email to activate your account.
             </p>
 
             {verificationToken && (
               <div className="pt-2">
                 <Link
                   to={`/auth/verify-email/${verificationToken}`}
-                  className="w-full inline-flex items-center justify-center gap-2 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-black uppercase text-xs tracking-wider transition-colors"
+                  className="w-full inline-flex items-center justify-center gap-2 py-3 rounded-full bg-[#2d5a27] hover:bg-[#23471f] text-white font-medium text-xs tracking-wide transition-colors"
                 >
                   <CheckCircle2 className="w-4 h-4" />
                   <span>Simulate Email Verification Link</span>
@@ -124,7 +124,7 @@ export const Register: React.FC = () => {
             <div className="pt-2">
               <Link
                 to="/auth/login"
-                className="text-xs font-bold text-[#ff4500] hover:underline uppercase tracking-wider"
+                className="text-xs text-[#666666] hover:text-[#111111] transition-colors"
               >
                 Back to Log In
               </Link>
@@ -133,11 +133,11 @@ export const Register: React.FC = () => {
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-[#8a6a50] mb-1.5">
+              <label className="block text-xs font-medium tracking-wide text-[#666666] mb-1.5">
                 Full Name
               </label>
               <div className="relative">
-                <UserIcon className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8a6a50]" />
+                <UserIcon className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#888888]" />
                 <input
                   type="text"
                   name="name"
@@ -145,17 +145,17 @@ export const Register: React.FC = () => {
                   placeholder="Alex Hunter"
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full bg-[#fffaf5] border border-[#f0e6d9] focus:border-[#ff4500] rounded-xl pl-10 pr-4 py-3 text-sm text-[#1a0a00] placeholder-[#8a6a50]/60 focus:outline-none transition-colors"
+                  className="w-full bg-[#faf9f6] border border-[#e8e4dd] focus:border-[#111111] rounded-xl pl-10 pr-4 py-2.5 text-xs text-[#111111] placeholder-[#888888] focus:outline-none transition-colors"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-[#8a6a50] mb-1.5">
+              <label className="block text-xs font-medium tracking-wide text-[#666666] mb-1.5">
                 Email Address
               </label>
               <div className="relative">
-                <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8a6a50]" />
+                <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#888888]" />
                 <input
                   type="email"
                   name="email"
@@ -163,17 +163,17 @@ export const Register: React.FC = () => {
                   placeholder="alex@example.com"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full bg-[#fffaf5] border border-[#f0e6d9] focus:border-[#ff4500] rounded-xl pl-10 pr-4 py-3 text-sm text-[#1a0a00] placeholder-[#8a6a50]/60 focus:outline-none transition-colors"
+                  className="w-full bg-[#faf9f6] border border-[#e8e4dd] focus:border-[#111111] rounded-xl pl-10 pr-4 py-2.5 text-xs text-[#111111] placeholder-[#888888] focus:outline-none transition-colors"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-[#8a6a50] mb-1.5">
+              <label className="block text-xs font-medium tracking-wide text-[#666666] mb-1.5">
                 Password
               </label>
               <div className="relative">
-                <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8a6a50]" />
+                <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#888888]" />
                 <input
                   type="password"
                   name="password"
@@ -181,28 +181,28 @@ export const Register: React.FC = () => {
                   placeholder="••••••••"
                   value={formData.password}
                   onChange={handleChange}
-                  className="w-full bg-[#fffaf5] border border-[#f0e6d9] focus:border-[#ff4500] rounded-xl pl-10 pr-4 py-3 text-sm text-[#1a0a00] placeholder-[#8a6a50]/60 focus:outline-none transition-colors"
+                  className="w-full bg-[#faf9f6] border border-[#e8e4dd] focus:border-[#111111] rounded-xl pl-10 pr-4 py-2.5 text-xs text-[#111111] placeholder-[#888888] focus:outline-none transition-colors"
                 />
               </div>
 
               {/* Password strength indicator */}
               {formData.password && (
                 <div className="mt-2 space-y-1">
-                  <div className="flex justify-between items-center text-[10px] uppercase font-black">
-                    <span className="text-[#8a6a50]">Strength:</span>
+                  <div className="flex justify-between items-center text-[10px] font-medium">
+                    <span className="text-[#666666]">Strength:</span>
                     <span
                       className={
                         strength <= 2
                           ? 'text-red-500'
                           : strength <= 3
                           ? 'text-yellow-600'
-                          : 'text-emerald-600'
+                          : 'text-[#2d5a27]'
                       }
                     >
                       {getStrengthLabel()}
                     </span>
                   </div>
-                  <div className="grid grid-cols-4 gap-1 h-1.5">
+                  <div className="grid grid-cols-4 gap-1 h-1">
                     {[1, 2, 3, 4].map((level) => (
                       <div
                         key={level}
@@ -212,8 +212,8 @@ export const Register: React.FC = () => {
                               ? 'bg-red-500'
                               : strength <= 3
                               ? 'bg-yellow-500'
-                              : 'bg-emerald-500'
-                            : 'bg-[#f0e6d9]'
+                              : 'bg-[#2d5a27]'
+                            : 'bg-[#e8e4dd]'
                         }`}
                       />
                     ))}
@@ -223,11 +223,11 @@ export const Register: React.FC = () => {
             </div>
 
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-[#8a6a50] mb-1.5">
+              <label className="block text-xs font-medium tracking-wide text-[#666666] mb-1.5">
                 Confirm Password
               </label>
               <div className="relative">
-                <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8a6a50]" />
+                <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#888888]" />
                 <input
                   type="password"
                   name="confirmPassword"
@@ -235,7 +235,7 @@ export const Register: React.FC = () => {
                   placeholder="••••••••"
                   value={formData.confirmPassword}
                   onChange={handleChange}
-                  className="w-full bg-[#fffaf5] border border-[#f0e6d9] focus:border-[#ff4500] rounded-xl pl-10 pr-4 py-3 text-sm text-[#1a0a00] placeholder-[#8a6a50]/60 focus:outline-none transition-colors"
+                  className="w-full bg-[#faf9f6] border border-[#e8e4dd] focus:border-[#111111] rounded-xl pl-10 pr-4 py-2.5 text-xs text-[#111111] placeholder-[#888888] focus:outline-none transition-colors"
                 />
               </div>
             </div>
@@ -243,19 +243,19 @@ export const Register: React.FC = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full flex items-center justify-center gap-2 py-4 rounded-xl bg-[#ff4500] hover:bg-[#e03800] text-white font-black uppercase text-xs tracking-wider transition-all duration-200 shadow-xl shadow-[#ff4500]/30 active:scale-95 disabled:opacity-50 cursor-pointer"
+              className="w-full flex items-center justify-center gap-2 py-3 rounded-full bg-[#111111] hover:bg-[#2d5a27] text-white font-medium text-xs tracking-wide transition-colors cursor-pointer disabled:opacity-50"
             >
               {isSubmitting ? <span>Creating Account...</span> : <span>Create Account</span>}
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-3.5 h-3.5" />
             </button>
           </form>
         )}
 
-        <div className="text-center pt-4 border-t border-[#f0e6d9] text-xs text-[#8a6a50]">
+        <div className="text-center pt-4 border-t border-[#e8e4dd] text-xs text-[#666666]">
           Already have an account?{' '}
           <Link
             to="/auth/login"
-            className="text-[#ff4500] font-black uppercase hover:underline ml-1"
+            className="text-[#111111] font-medium hover:underline ml-1"
           >
             Log In
           </Link>
