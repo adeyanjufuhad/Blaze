@@ -47,11 +47,11 @@ export default {
         'oriente-card': '0 1px 3px rgba(0, 0, 0, 0.04)',
       },
       animation: {
-        'marquee-fast': 'marquee 20s linear infinite',
-        marquee: 'marquee 25s linear infinite',
-        'marquee-slow': 'marquee 35s linear infinite',
-        'marquee-reverse': 'marquee-reverse 25s linear infinite',
-        'marquee-reverse-slow': 'marquee-reverse 35s linear infinite',
+        'marquee-fast': 'marquee 45s linear infinite',
+        marquee: 'marquee 65s linear infinite',
+        'marquee-slow': 'marquee 85s linear infinite',
+        'marquee-reverse': 'marquee-reverse 65s linear infinite',
+        'marquee-reverse-slow': 'marquee-reverse 85s linear infinite',
       },
       keyframes: {
         marquee: {
