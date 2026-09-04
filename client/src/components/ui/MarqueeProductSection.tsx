@@ -1,8 +1,10 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import { Pizza } from '../../types';
 import { useCartStore } from '../../store/useCartStore';
+import { Magnetic } from './Magnetic';
+import { TextScramble } from './TextScramble';
 
 interface MarqueeProductSectionProps {
   pizza: Pizza;
@@ -16,6 +18,19 @@ export const MarqueeProductSection: React.FC<MarqueeProductSectionProps> = ({
   reverseMarquee = false,
 }) => {
   const addItem = useCartStore((state) => state.addItem);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start end', 'end start'],
+  });
+
+  const pizzaY = useTransform(scrollYProgress, [0, 1], [-35, 35]);
+  const pizzaRotate = useTransform(
+    scrollYProgress,
+    [0, 1],
+    reverseMarquee ? [4, -4] : [-4, 4]
+  );
 
   const handleAddToCart = () => {
     addItem({
@@ -31,7 +46,10 @@ export const MarqueeProductSection: React.FC<MarqueeProductSectionProps> = ({
   const repeatedText = `${pizza.name.toUpperCase()} · `.repeat(8);
 
   return (
-    <section className="relative overflow-hidden bg-[#faf9f6] py-20 md:py-28 border-y border-[#e8e4dd] select-none">
+    <section
+      ref={sectionRef}
+      className="relative overflow-hidden bg-[#faf9f6] py-20 md:py-28 border-y border-[#e8e4dd] select-none"
+    >
       {/* 3-Row Background Infinite Kinetic Marquee */}
       <div className="pointer-events-none absolute inset-0 flex flex-col justify-center gap-2 md:gap-4 opacity-[0.4] overflow-hidden -z-0">
         {/* Row 1: Fast (20s) */}
@@ -85,13 +103,14 @@ export const MarqueeProductSection: React.FC<MarqueeProductSectionProps> = ({
             <span>{tagline}</span>
           </div>
 
-          {/* Centered Large High-Res Product Image */}
+          {/* Centered Large High-Res Product Image with Scroll Parallax */}
           <motion.div
+            style={{ y: pizzaY, rotate: pizzaRotate }}
             initial={{ scale: 0.95, opacity: 0 }}
             whileInView={{ scale: 1, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="group relative my-4 h-64 sm:h-80 md:h-96 w-64 sm:w-80 md:w-96 cursor-pointer"
+            className="group relative my-4 h-64 sm:h-80 md:h-96 w-64 sm:w-80 md:w-96 cursor-pointer will-change-transform"
           >
             <img
               src={pizza.image}
@@ -114,14 +133,16 @@ export const MarqueeProductSection: React.FC<MarqueeProductSectionProps> = ({
               <span className="text-lg font-medium text-[#111111]">
                 ₦{pizza.basePrice.toLocaleString()}
               </span>
-              <button
-                type="button"
-                onClick={handleAddToCart}
-                className="inline-flex items-center gap-2 rounded-full bg-[#111111] hover:bg-[#2d5a27] px-6 py-2.5 text-xs font-medium text-white transition-colors cursor-pointer"
-              >
-                <span>Add to Bag</span>
-                <ArrowUpRight className="w-3.5 h-3.5 stroke-[2]" />
-              </button>
+              <Magnetic strength={0.35}>
+                <button
+                  type="button"
+                  onClick={handleAddToCart}
+                  className="inline-flex items-center gap-2 rounded-full bg-[#111111] hover:bg-[#2d5a27] px-6 py-2.5 text-xs font-medium text-white transition-colors cursor-pointer shadow-sm"
+                >
+                  <TextScramble text="Add to Bag" />
+                  <ArrowUpRight className="w-3.5 h-3.5 stroke-[2]" />
+                </button>
+              </Magnetic>
             </div>
           </div>
         </div>

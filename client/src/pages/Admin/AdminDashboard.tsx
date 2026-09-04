@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ShoppingBag, TrendingUp, AlertTriangle, Utensils, ArrowUpRight, Clock, CheckCircle, Package } from 'lucide-react';
 import { StatusBadge } from '../../components/ui/StatusBadge';
 import { Skeleton } from '../../components/ui/Skeleton';
+import { AnimatedCounter } from '../../components/ui/AnimatedCounter';
 import { toast } from '../../components/ui/Toast';
 import { Order, InventoryItem } from '../../types';
 import api from '../../lib/api';
@@ -80,10 +81,10 @@ export const AdminDashboard: React.FC = () => {
                 Total Orders Today
               </span>
               <span className="text-3xl font-semibold text-[#111111] mt-1 block font-serif">
-                {stats?.totalOrdersToday ?? 0}
+                <AnimatedCounter value={stats?.totalOrdersToday ?? 0} />
               </span>
               <span className="text-[10px] text-[#666666]">
-                Lifetime: {stats?.totalOrdersCount ?? 0}
+                Lifetime: <AnimatedCounter value={stats?.totalOrdersCount ?? 0} duration={1.2} />
               </span>
             </div>
             <div className="w-12 h-12 rounded-xl bg-neutral-100 border border-neutral-200 flex items-center justify-center text-[#111111]">
@@ -98,10 +99,10 @@ export const AdminDashboard: React.FC = () => {
                 Revenue Today
               </span>
               <span className="text-3xl font-semibold text-[#111111] mt-1 block font-serif">
-                ₦{(stats?.revenueToday ?? 0).toLocaleString()}
+                <AnimatedCounter value={stats?.revenueToday ?? 0} prefix="₦" />
               </span>
               <span className="text-[10px] text-[#666666]">
-                Total: ₦{(stats?.totalRevenue ?? 0).toLocaleString()}
+                Total: <AnimatedCounter value={stats?.totalRevenue ?? 0} prefix="₦" duration={1.2} />
               </span>
             </div>
             <div className="w-12 h-12 rounded-xl bg-[#2d5a27]/10 border border-[#2d5a27]/20 flex items-center justify-center text-[#2d5a27]">
@@ -116,7 +117,7 @@ export const AdminDashboard: React.FC = () => {
                 Active Orders
               </span>
               <span className="text-3xl font-semibold text-amber-700 mt-1 block font-serif">
-                {stats?.activeOrders ?? 0}
+                <AnimatedCounter value={stats?.activeOrders ?? 0} />
               </span>
               <span className="text-[10px] text-[#666666]">
                 In kitchen or delivery
@@ -138,7 +139,7 @@ export const AdminDashboard: React.FC = () => {
                   (stats?.lowStockCount ?? 0) > 0 ? 'text-red-500' : 'text-[#2d5a27]'
                 }`}
               >
-                {stats?.lowStockCount ?? 0}
+                <AnimatedCounter value={stats?.lowStockCount ?? 0} />
               </span>
               <span className="text-[10px] text-[#666666]">
                 Below threshold

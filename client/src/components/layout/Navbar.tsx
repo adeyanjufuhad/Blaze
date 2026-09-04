@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ShoppingBag, LogOut, Menu as MenuIcon, X, Shield, User } from 'lucide-react';
 import { Logo } from '../ui/Logo';
+import { Magnetic } from '../ui/Magnetic';
+import { TextScramble } from '../ui/TextScramble';
 import { useCartStore } from '../../store/useCartStore';
 import { useAuthStore } from '../../store/useAuthStore';
 
@@ -50,7 +52,7 @@ export const Navbar: React.FC = () => {
                 isActive('/menu') ? 'font-semibold border-b border-[#111111] pb-0.5' : ''
               }`}
             >
-              MENU
+              <TextScramble text="MENU" />
             </Link>
             <Link
               to="/build"
@@ -58,7 +60,7 @@ export const Navbar: React.FC = () => {
                 isActive('/build') ? 'font-semibold border-b border-[#111111] pb-0.5' : ''
               }`}
             >
-              BUILD PIZZA
+              <TextScramble text="BUILD PIZZA" />
             </Link>
             <Link
               to="/orders"
@@ -66,7 +68,7 @@ export const Navbar: React.FC = () => {
                 isActive('/orders') ? 'font-semibold border-b border-[#111111] pb-0.5' : ''
               }`}
             >
-              TRACK ORDER
+              <TextScramble text="TRACK ORDER" />
             </Link>
             {isAdminAuthenticated && (
               <Link
@@ -82,12 +84,14 @@ export const Navbar: React.FC = () => {
           {/* Right: Order Now pill button + Bag + Auth */}
           <div className="flex items-center gap-3">
             {/* Order Now Button: #111111 background, white text, rounded-full, px-5 py-2, text-xs font-medium */}
-            <Link
-              to="/menu"
-              className="hidden sm:inline-flex items-center justify-center rounded-full bg-[#111111] px-5 py-2 text-xs font-medium text-[#faf9f6] hover:bg-[#2d5a27] transition-colors"
-            >
-              Order Now
-            </Link>
+            <Magnetic strength={0.35}>
+              <Link
+                to="/menu"
+                className="hidden sm:inline-flex items-center justify-center rounded-full bg-[#111111] px-5 py-2 text-xs font-medium text-[#faf9f6] hover:bg-[#2d5a27] transition-colors shadow-xs"
+              >
+                <TextScramble text="Order Now" />
+              </Link>
+            </Magnetic>
 
             {/* Cart Bag Icon: simple outline bag with badge */}
             <button

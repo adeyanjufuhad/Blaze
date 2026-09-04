@@ -4,6 +4,7 @@ import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
 import { CartDrawer } from './components/ui/CartDrawer';
 import { ToastContainer } from './components/ui/Toast';
+import { CustomCursor } from './components/ui/CustomCursor';
 import { ProtectedRoute } from './components/auth/ProtectedRoute';
 import { AdminRoute } from './components/auth/AdminRoute';
 
@@ -90,6 +91,7 @@ const AppLayout: React.FC = () => {
       {!isAdminRoute && <Footer />}
 
       {/* Global Elements */}
+      <CustomCursor />
       <CartDrawer />
       <ToastContainer />
     </div>

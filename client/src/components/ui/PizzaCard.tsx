@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import { Plus } from 'lucide-react';
 import { Pizza } from '../../types';
 import { StatusBadge } from './StatusBadge';
+import { Magnetic } from './Magnetic';
+import { TextScramble } from './TextScramble';
 import { useCartStore } from '../../store/useCartStore';
 
 interface PizzaCardProps {
@@ -52,15 +54,17 @@ export const PizzaCard: React.FC<PizzaCardProps> = ({ pizza, className = '' }) =
 
         {/* Slide-up "Add to bag" button on hover */}
         <div className="absolute inset-x-3 bottom-3 z-10 translate-y-12 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
-          <button
-            type="button"
-            onClick={handleAddToCart}
-            className="flex w-full items-center justify-center gap-1.5 rounded-full bg-[#2d5a27] hover:bg-[#23471f] py-2.5 text-xs font-medium text-white shadow-md transition-colors cursor-pointer"
-            aria-label={`Add ${pizza.name} to bag`}
-          >
-            <Plus className="w-3.5 h-3.5 stroke-[2.5]" />
-            <span>Add to bag</span>
-          </button>
+          <Magnetic strength={0.25} className="w-full">
+            <button
+              type="button"
+              onClick={handleAddToCart}
+              className="flex w-full items-center justify-center gap-1.5 rounded-full bg-[#2d5a27] hover:bg-[#23471f] py-2.5 text-xs font-medium text-white shadow-md transition-colors cursor-pointer"
+              aria-label={`Add ${pizza.name} to bag`}
+            >
+              <Plus className="w-3.5 h-3.5 stroke-[2.5]" />
+              <TextScramble text="Add to bag" />
+            </button>
+          </Magnetic>
         </div>
       </div>
 

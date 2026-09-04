@@ -6,6 +6,10 @@ import { PizzaCard } from '../components/ui/PizzaCard';
 import { PizzaCardSkeleton } from '../components/ui/Skeleton';
 import { MarqueeProductSection } from '../components/ui/MarqueeProductSection';
 import { Marquee } from '../components/ui/Marquee';
+import { Magnetic } from '../components/ui/Magnetic';
+import { TextScramble } from '../components/ui/TextScramble';
+import { ParallaxImage } from '../components/ui/ParallaxImage';
+import { AnimatedCounter } from '../components/ui/AnimatedCounter';
 import { Pizza } from '../types';
 import api from '../lib/api';
 
@@ -138,27 +142,31 @@ export const Home: React.FC = () => {
                 Wood-fired artisanal pizzas baked with patience and passion. Hand-stretched dough, San Marzano tomatoes, and whole-milk mozzarella delivered fresh.
               </p>
 
-              {/* CTAs */}
+              {/* CTAs with Magnetic interaction and TextScramble */}
               <div className="pt-4 flex flex-wrap items-center gap-5">
-                <Link
-                  to="/menu"
-                  className="inline-flex items-center justify-center rounded-full bg-[#111111] hover:bg-[#2d5a27] px-8 py-3.5 text-xs font-medium text-white transition-colors"
-                >
-                  Order Now
-                </Link>
+                <Magnetic strength={0.35}>
+                  <Link
+                    to="/menu"
+                    className="inline-flex items-center justify-center rounded-full bg-[#111111] hover:bg-[#2d5a27] px-8 py-3.5 text-xs font-medium text-white transition-colors shadow-sm"
+                  >
+                    <TextScramble text="Order Now" />
+                  </Link>
+                </Magnetic>
 
-                <button
-                  type="button"
-                  onClick={scrollToMenu}
-                  className="inline-flex items-center gap-2 text-xs font-medium text-[#111111] hover:opacity-70 transition-opacity cursor-pointer px-3 py-2"
-                >
-                  <span>View Menu</span>
-                  <ArrowDown className="w-3.5 h-3.5" />
-                </button>
+                <Magnetic strength={0.2}>
+                  <button
+                    type="button"
+                    onClick={scrollToMenu}
+                    className="inline-flex items-center gap-2 text-xs font-medium text-[#111111] hover:opacity-70 transition-opacity cursor-pointer px-4 py-3 rounded-full border border-transparent hover:border-[#e8e4dd]"
+                  >
+                    <span>View Menu</span>
+                    <ArrowDown className="w-3.5 h-3.5" />
+                  </button>
+                </Magnetic>
               </div>
             </div>
 
-            {/* Right Food Photo */}
+            {/* Right Food Photo with Scroll Parallax */}
             <div className="lg:col-span-5 relative flex justify-center">
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
@@ -166,12 +174,54 @@ export const Home: React.FC = () => {
                 transition={{ duration: 0.8 }}
                 className="relative w-full max-w-md aspect-square overflow-hidden rounded-3xl bg-[#f5f2ed] border border-[#e8e4dd] shadow-[0_15px_40px_rgba(0,0,0,0.06)]"
               >
-                <img
+                <ParallaxImage
                   src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=1000&q=80"
                   alt="Artisanal Wood-Fired Pizza"
-                  className="h-full w-full object-cover oriente-img-hover"
+                  offset={40}
+                  rotateRange={2.5}
+                  imgClassName="oriente-img-hover"
                 />
               </motion.div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* BRAND STATS & HERITAGE (Animated Number Counters) */}
+      <section className="border-b border-[#e8e4dd] bg-[#faf9f6] py-12 px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+            <div className="space-y-1 text-center sm:text-left border-r border-[#e8e4dd]/70 pr-4">
+              <div className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-[#111111]">
+                <AnimatedCounter value={100} suffix="%" />
+              </div>
+              <p className="text-xs uppercase tracking-widest text-[#666666]">
+                Artisanal Sourdough
+              </p>
+            </div>
+            <div className="space-y-1 text-center sm:text-left sm:border-r border-[#e8e4dd]/70 pr-4">
+              <div className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-[#111111]">
+                <AnimatedCounter value={48} suffix="hr" />
+              </div>
+              <p className="text-xs uppercase tracking-widest text-[#666666]">
+                Cold Fermentation
+              </p>
+            </div>
+            <div className="space-y-1 text-center sm:text-left border-r border-[#e8e4dd]/70 pr-4">
+              <div className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-[#111111]">
+                <AnimatedCounter value={900} suffix="°" />
+              </div>
+              <p className="text-xs uppercase tracking-widest text-[#666666]">
+                Wood-Fired Heat
+              </p>
+            </div>
+            <div className="space-y-1 text-center sm:text-left">
+              <div className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-[#111111]">
+                <AnimatedCounter value={20000} suffix="+" />
+              </div>
+              <p className="text-xs uppercase tracking-widest text-[#666666]">
+                Late-Night Crusts Served
+              </p>
             </div>
           </div>
         </div>
