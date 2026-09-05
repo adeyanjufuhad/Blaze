@@ -3,6 +3,7 @@ const http = require('http');
 const cors = require('cors');
 const path = require('path');
 const dotenv = require('dotenv');
+const mongoose = require('mongoose');
 
 // Load environment variables
 dotenv.config();
@@ -41,12 +42,13 @@ app.use(
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
-// Health check
+// Health check endpoint (for Render / uptime monitoring)
 app.get('/api/health', (req, res) => {
-  res.json({
-    status: 'online',
-    service: 'Blaze Pizza Platform',
-    timestamp: new Date().toISOString(),
+  const isDbConnected = mongoose.connection.readyState === 1;
+  res.status(isDbConnected ? 200 : 503).json({
+    status: 'ok',
+    database: isDbConnected ? 'connected' : 'disconnected',
+    timestamp: new Date(),
   });
 });
 

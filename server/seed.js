@@ -179,11 +179,25 @@ const seedDatabase = async () => {
     const customizationOptions = await CustomizationOption.create(customizationData);
     console.log(`[Blaze Seed] Created ${customizationOptions.length} customization options`);
 
-    console.log('\n=============================================================');
+    // 5. Verification: Query and log counts from each collection in the database
+    console.log('\n[Blaze Seed] Verifying database records...');
+    const [pizzaCount, customizationCount, inventoryCount, userCount] = await Promise.all([
+      Pizza.countDocuments(),
+      CustomizationOption.countDocuments(),
+      InventoryItem.countDocuments(),
+      User.countDocuments(),
+    ]);
+
+    console.log('\n================== SEED VERIFICATION ==================');
+    console.log(` ✓ Pizzas:                ${pizzaCount} items`);
+    console.log(` ✓ Customization Options: ${customizationCount} items (bases, sauces, cheeses, veggies)`);
+    console.log(` ✓ Inventory Items:       ${inventoryCount} items (with stock & thresholds)`);
+    console.log(` ✓ Users:                 ${userCount} accounts (includes admin: admin@blaze.com)`);
+    console.log('========================================================\n');
+
     console.log('🔥 [Blaze Seed] Database successfully seeded with all initial data!');
     console.log('   Admin credentials: admin@blaze.com / Admin@blaze123');
-    console.log('   User credentials:  alex@blaze.com  / User@blaze123');
-    console.log('=============================================================\n');
+    console.log('   User credentials:  alex@blaze.com  / User@blaze123\n');
 
     process.exit(0);
   } catch (err) {
