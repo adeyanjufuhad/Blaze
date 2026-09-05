@@ -86,8 +86,21 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
+        {/* Giant Light Shadowy Brand Watermark */}
+        <div className="relative w-full overflow-hidden select-none pointer-events-none my-4 sm:my-8 text-center">
+          <span
+            className="font-serif font-black uppercase text-[19vw] sm:text-[20vw] leading-[0.78] tracking-tight block text-[#faf9f6]/[0.06]"
+            style={{
+              textShadow:
+                '0 0 50px rgba(250, 249, 246, 0.08), 0 0 100px rgba(250, 249, 246, 0.03)',
+            }}
+          >
+            BLAZE
+          </span>
+        </div>
+
         {/* Bottom Socials & Copyright */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#666666]">
+        <div className="pt-6 border-t border-[#222222] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#666666]">
           <div>
             © {new Date().getFullYear()} Blaze. Every slice, an adventure.
           </div>
