@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 130" width="540" height="130" fill="none">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&amp;family=Inter:wght@400;500;600&amp;display=swap');
+      .brand-title {
+        font-family: 'Playfair Display', Georgia, serif;
+        font-weight: 700;
+        font-size: 46px;
+        fill: #faf9f6;
+        letter-spacing: -0.02em;
+      }
+      .brand-sub {
+        font-family: 'Inter', -apple-system, sans-serif;
+        font-weight: 600;
+        font-size: 11px;
+        fill: #8e887f;
+        letter-spacing: 0.28em;
+      }
+      .brand-badge {
+        font-family: 'Inter', -apple-system, sans-serif;
+        font-weight: 500;
+        font-size: 10px;
+        fill: #faf9f6;
+      }
+    </style>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#141414"/>
+      <stop offset="100%" stop-color="#0c0c0c"/>
+    </linearGradient>
+    <filter id="subtleGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Container Box -->
+  <rect x="2" y="2" width="536" height="126" rx="28" fill="url(#bgGrad)" stroke="#262422" stroke-width="1.5"/>
+
+  <!-- Flame Icon Emblem Container -->
+  <g transform="translate(34, 31)">
+    <rect width="68" height="68" rx="20" fill="#faf9f6" />
+    <!-- Flame Geometry -->
+    <g transform="translate(14, 14) scale(1.666)" stroke="#111111" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" fill="none">
+      <path d="M12 2c-3 4-6 7.5-6 12a6 6 0 0 0 12 0c0-4.5-3-8-6-12z" stroke="#111111" fill="none" />
+      <path d="M8.5 14.5A2.5 2.5 0 0 0 11 17c1.38 0 2.5-1.12 2.5-2.5 0-1.63-1.04-2.5-2.5-4-1.46 1.5-2.5 2.37-2.5 4z" fill="#2d5a27" stroke="#2d5a27" />
+    </g>
+  </g>
+
+  <!-- Brand Typography -->
+  <text x="122" y="74" class="brand-title">Blaze</text>
+  <text x="124" y="94" class="brand-sub">WOOD-FIRED ARTISANAL PIZZERIA</text>
+
+  <!-- Right Accent Badge -->
+  <g transform="translate(406, 47)">
+    <rect width="98" height="34" rx="17" fill="#1e1d1a" stroke="#33302a" stroke-width="1"/>
+    <circle cx="16" cy="17" r="4" fill="#2d5a27" filter="url(#subtleGlow)"/>
+    <circle cx="16" cy="17" r="2.5" fill="#52a048"/>
+    <text x="28" y="20.5" class="brand-badge">EST. 2026</text>
+  </g>
+</svg>
