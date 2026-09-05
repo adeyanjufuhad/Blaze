@@ -41,6 +41,7 @@ export default {
           'Roboto',
           'sans-serif',
         ],
+        handwritten: ['Caveat', 'cursive'],
       },
       boxShadow: {
         'oriente-subtle': '0 2px 10px rgba(0, 0, 0, 0.03)',

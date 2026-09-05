@@ -10,6 +10,7 @@ import { Magnetic } from '../components/ui/Magnetic';
 import { TextScramble } from '../components/ui/TextScramble';
 import { ParallaxImage } from '../components/ui/ParallaxImage';
 import { AnimatedCounter } from '../components/ui/AnimatedCounter';
+import { MenuHero } from '../components/home/MenuHero';
 import { Pizza } from '../types';
 import api from '../lib/api';
 
@@ -235,7 +236,10 @@ export const Home: React.FC = () => {
         />
       )}
 
-      {/* 3. MENU / PRODUCT GRID */}
+      {/* 3. OUR MENU TEXT-CLIP HERO SECTION */}
+      <MenuHero />
+
+      {/* 4. MENU / PRODUCT GRID */}
       <section id="menu-section" className="py-24 px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl w-full">
         <div className="text-center max-w-2xl mx-auto mb-12 space-y-2">
           <h2 className="font-serif text-4xl sm:text-5xl text-[#111111] font-normal tracking-tight">

@@ -54,3 +54,116 @@ h1, h2, h3, h4, .font-serif {
   background-image: radial-gradient(rgba(17, 17, 17, 0.02) 1px, transparent 0);
   background-size: 24px 24px;
 }
+
+/* ========================================================
+   MENU HERO TEXT-CLIP & LIVING BREATHING ANIMATION
+======================================================== */
+.menu-hero {
+  position: relative;
+  background: #fafaf8;
+  padding: 60px 0;
+  overflow: hidden;
+}
+
+.menu-hero-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  line-height: 1;
+}
+
+.clip-letter {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(10rem, 22vw, 22rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: transparent;
+  
+  background-image: var(--img);
+  background-size: 200%;
+  background-position: center;
+  
+  -webkit-background-clip: text;
+  background-clip: text;
+  
+  animation: panImage 8s ease-in-out infinite alternate;
+  
+  display: inline-block;
+  line-height: 0.85;
+}
+
+/* Each letter pans at different speed + direction */
+.clip-letter:nth-child(1), .clip-letter-1 { 
+  animation-duration: 7s; 
+  animation-direction: alternate;
+}
+.clip-letter:nth-child(2), .clip-letter-2 { 
+  animation-duration: 9s; 
+  animation-direction: alternate-reverse;
+}
+.clip-letter:nth-child(3), .clip-letter-3 { 
+  animation-duration: 6s; 
+  animation-direction: alternate;
+}
+.clip-letter:nth-child(5), .clip-letter-4 { 
+  animation-duration: 10s; 
+  animation-direction: alternate-reverse;
+}
+.clip-letter:nth-child(6), .clip-letter-5 { 
+  animation-duration: 8s; 
+  animation-direction: alternate;
+}
+.clip-letter:nth-child(7), .clip-letter-6 { 
+  animation-duration: 7s; 
+  animation-direction: alternate-reverse;
+}
+.clip-letter:nth-child(8), .clip-letter-7 { 
+  animation-duration: 9s; 
+  animation-direction: alternate;
+}
+
+@keyframes panImage {
+  0% { background-position: 0% 30%; }
+  100% { background-position: 100% 70%; }
+}
+
+.clip-space {
+  display: inline-block;
+  width: clamp(1rem, 3vw, 3rem);
+}
+
+.letter-divider {
+  display: inline-block;
+  width: 2px;
+  height: 55%;
+  background: #ffffff;
+  opacity: 0.6;
+  align-self: center;
+  margin: 0 -1px;
+  position: relative;
+  z-index: 5;
+}
+
+/* Handwritten overlay text */
+.handwritten-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-3deg);
+  
+  font-family: 'Caveat', cursive;
+  font-size: clamp(1.8rem, 4vw, 3.5rem);
+  font-weight: 700;
+  color: #ffffff;
+  text-align: center;
+  line-height: 1.2;
+  
+  text-shadow: 
+    2px 2px 0px rgba(0,0,0,0.3),
+    0 0 20px rgba(0,0,0,0.2);
+  
+  pointer-events: none;
+  z-index: 10;
+}
+
