@@ -48,6 +48,7 @@ app.get('/api/health', (req, res) => {
   res.status(isDbConnected ? 200 : 503).json({
     status: 'ok',
     database: isDbConnected ? 'connected' : 'disconnected',
+    databaseName: isDbConnected ? mongoose.connection.name : null,
     timestamp: new Date(),
   });
 });

@@ -9,11 +9,11 @@ const getTransporter = async () => {
   const { GMAIL_USER, GMAIL_APP_PASSWORD } = process.env;
 
   if (GMAIL_USER && GMAIL_APP_PASSWORD) {
-    transporter = nodemailer.createTransporter({
+    transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: GMAIL_USER,
-        pass: GMAIL_APP_PASSWORD,
+        user: GMAIL_USER.trim(),
+        pass: GMAIL_APP_PASSWORD.replace(/\s+/g, ''),
       },
     });
     console.log('[Blaze Mail] Initialized Gmail SMTP transporter');
@@ -24,7 +24,7 @@ const getTransporter = async () => {
   console.log('[Blaze Mail] No Gmail credentials found. Using test ethereal/log transporter.');
   try {
     const testAccount = await nodemailer.createTestAccount();
-    transporter = nodemailer.createTransporter({
+    transporter = nodemailer.createTransport({
       host: 'smtp.ethereal.email',
       port: 587,
       secure: false,
@@ -90,10 +90,10 @@ const createDarkEmailTemplate = (title, contentHtml) => {
         margin: 8px 0 0;
       }
       .brand-sub {
-        color: #ff4500;
+        color: #c7a97b;
         font-size: 11px;
         font-weight: 700;
-        letter-spacing: 2px;
+        letter-spacing: 2.5px;
         text-transform: uppercase;
       }
       .body-content {
@@ -104,15 +104,15 @@ const createDarkEmailTemplate = (title, contentHtml) => {
       }
       .btn {
         display: inline-block;
-        background-color: #ff4500;
+        background-color: #2d5a27;
         color: #ffffff !important;
-        font-size: 15px;
-        font-weight: 700;
+        font-size: 14px;
+        font-weight: 600;
         text-decoration: none;
-        padding: 14px 28px;
-        border-radius: 8px;
+        padding: 13px 28px;
+        border-radius: 9999px;
         margin: 24px 0;
-        box-shadow: 0 4px 14px rgba(255, 69, 0, 0.4);
+        box-shadow: 0 4px 14px rgba(45, 90, 39, 0.4);
       }
       .footer {
         padding: 24px 32px;
@@ -145,7 +145,7 @@ const createDarkEmailTemplate = (title, contentHtml) => {
   <body>
     <div class="container">
       <div class="header">
-        <div style="display:inline-block; width:44px; height:44px; background-color:#ff4500; border-radius:10px; line-height:44px; text-align:center; font-size:22px;">🔥</div>
+        <div style="display:inline-block; width:44px; height:44px; background-color:#1e1d1a; border:1px solid #33302a; border-radius:12px; line-height:44px; text-align:center; font-size:22px;">🍕</div>
         <h1 class="brand-title">BLAZE</h1>
         <div class="brand-sub">PIZZA · DELIVERED</div>
       </div>

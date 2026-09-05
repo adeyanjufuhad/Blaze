@@ -13,6 +13,7 @@ const connectWithRetry = async (uri, attempt = 1) => {
     console.log(`[Blaze DB] Connecting to MongoDB (Attempt ${attempt}/${MAX_RETRIES})...`);
     const conn = await mongoose.connect(uri, {
       serverSelectionTimeoutMS: 8000,
+      dbName: 'blaze',
     });
     console.log('MongoDB connected');
     console.log(`[Blaze DB] Connection host: ${conn.connection.host} | DB: ${conn.connection.name}`);

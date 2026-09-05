@@ -228,7 +228,11 @@ router.post('/forgot-password', authRateLimiter, async (req, res, next) => {
     user.resetPasswordExpiry = Date.now() + 3600000; // 1 hour
     await user.save();
 
-    await sendPasswordResetEmail(user.email, resetToken, user.name);
+    try {
+      await sendPasswordResetEmail(user.email, resetToken, user.name);
+    } catch (mailErr) {
+      console.error('[Blaze Auth] Could not send password reset email:', mailErr.message);
+    }
 
     res.json({
       success: true,
