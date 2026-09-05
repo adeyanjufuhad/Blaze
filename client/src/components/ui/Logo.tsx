@@ -18,66 +18,71 @@ export const Logo: React.FC<LogoProps> = ({
 }) => {
   const iconSizes = {
     sm: 'w-7 h-7',
-    md: 'w-8 h-8',
-    lg: 'w-10 h-10',
-    xl: 'w-12 h-12',
+    md: 'w-9 h-9',
+    lg: 'w-11 h-11',
+    xl: 'w-14 h-14',
   };
 
   const textSizes = {
     sm: 'text-lg',
-    md: 'text-xl',
-    lg: 'text-2xl',
-    xl: 'text-3xl',
+    md: 'text-xl sm:text-2xl',
+    lg: 'text-2xl sm:text-3xl',
+    xl: 'text-3xl sm:text-4xl',
   };
 
   const subtextSizes = {
-    sm: 'text-[8px] tracking-[0.2em]',
-    md: 'text-[9px] tracking-[0.22em]',
-    lg: 'text-[10px] tracking-[0.25em]',
-    xl: 'text-[11px] tracking-[0.28em]',
+    sm: 'text-[7px] tracking-[0.2em]',
+    md: 'text-[8.5px] tracking-[0.22em]',
+    lg: 'text-[10px] tracking-[0.24em]',
+    xl: 'text-[11.5px] tracking-[0.26em]',
+  };
+
+  const dividerHeights = {
+    sm: 'h-6',
+    md: 'h-8',
+    lg: 'h-10',
+    xl: 'h-12',
   };
 
   const isDarkBg = !darkText;
 
   const content = (
-    <div className={`flex items-center gap-2.5 select-none group ${className}`}>
-      {/* Sleek minimal flame pill mark */}
+    <div className={`flex items-center gap-2.5 sm:gap-3 select-none group ${className}`}>
+      {/* Precision squircle emblem mark */}
       <div
-        className={`${iconSizes[size]} relative flex-shrink-0 rounded-lg ${
-          isDarkBg ? 'bg-white text-[#111111]' : 'bg-[#111111] text-white'
-        } p-1.5 flex items-center justify-center transition-transform duration-300 group-hover:scale-105`}
+        className={`${iconSizes[size]} relative flex-shrink-0 rounded-xl overflow-hidden shadow-sm transition-transform duration-300 group-hover:scale-105 ${
+          isDarkBg ? 'ring-1 ring-white/15' : 'ring-1 ring-black/5'
+        }`}
       >
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="w-full h-full"
-        >
-          <path d="M8.5 14.5A2.5 2.5 0 0 0 11 17c1.38 0 2.5-1.12 2.5-2.5 0-1.63-1.04-2.5-2.5-4-1.46 1.5-2.5 2.37-2.5 4z" fill="currentColor" />
-          <path d="M12 2c-3 4-6 7.5-6 12a6 6 0 0 0 12 0c0-4.5-3-8-6-12z" />
-        </svg>
+        <img
+          src="/logo-mark.png"
+          alt="Blaze"
+          className="w-full h-full object-cover select-none pointer-events-none"
+        />
       </div>
 
-      {/* Typography */}
+      {/* Vertical hairline divider */}
+      <div
+        className={`w-px ${dividerHeights[size]} ${
+          isDarkBg ? 'bg-white/20' : 'bg-[#ded8ce]'
+        } flex-shrink-0 transition-colors`}
+      />
+
+      {/* Typography: BLAZE + PIZZA · DELIVERED */}
       <div className="flex flex-col justify-center leading-none">
         <span
-          className={`font-serif tracking-tight ${
+          className={`font-serif font-bold uppercase tracking-tight ${
             isDarkBg ? 'text-[#faf9f6]' : 'text-[#111111]'
           } ${textSizes[size]}`}
-          style={{ letterSpacing: '-0.02em' }}
+          style={{ letterSpacing: '0.04em' }}
         >
-          Blaze
+          BLAZE
         </span>
         {showSubtext && (
           <span
-            className={`font-medium ${
-              isDarkBg ? 'text-[#a39e93]' : 'text-[#666666]'
-            } uppercase ${subtextSizes[size]} mt-0.5`}
+            className={`font-sans font-semibold uppercase ${subtextSizes[size]} text-[#c7a97b] mt-1 whitespace-nowrap`}
           >
-            Wood-Fired
+            PIZZA · DELIVERED
           </span>
         )}
       </div>
@@ -86,7 +91,10 @@ export const Logo: React.FC<LogoProps> = ({
 
   if (isLink) {
     return (
-      <Link to="/" className="inline-block outline-none focus-visible:ring-2 focus-visible:ring-[#111111] rounded-lg">
+      <Link
+        to="/"
+        className="inline-block outline-none focus-visible:ring-2 focus-visible:ring-[#111111] rounded-lg"
+      >
         {content}
       </Link>
     );
