@@ -61,8 +61,13 @@ h1, h2, h3, h4, .font-serif {
 .menu-hero {
   position: relative;
   background: #fafaf8;
-  padding: 60px 0;
+  padding: 60px 1.5rem;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .menu-hero-text {
@@ -70,12 +75,17 @@ h1, h2, h3, h4, .font-serif {
   align-items: center;
   justify-content: center;
   width: 100%;
+  max-width: 1350px;
+  margin: 0 auto;
   line-height: 1;
+  white-space: nowrap;
+  box-sizing: border-box;
+  overflow: visible;
 }
 
 .clip-letter {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(10rem, 22vw, 22rem);
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(2.5rem, 11.5vw, 11rem);
   font-weight: 900;
   letter-spacing: -0.02em;
   color: transparent;
@@ -91,6 +101,7 @@ h1, h2, h3, h4, .font-serif {
   
   display: inline-block;
   line-height: 0.85;
+  flex-shrink: 0;
 }
 
 /* Each letter pans at different speed + direction */
@@ -130,7 +141,8 @@ h1, h2, h3, h4, .font-serif {
 
 .clip-space {
   display: inline-block;
-  width: clamp(1rem, 3vw, 3rem);
+  width: clamp(0.75rem, 2vw, 2.25rem);
+  flex-shrink: 0;
 }
 
 .letter-divider {
@@ -140,9 +152,10 @@ h1, h2, h3, h4, .font-serif {
   background: #ffffff;
   opacity: 0.6;
   align-self: center;
-  margin: 0 -1px;
+  margin: 0 clamp(1px, 0.3vw, 4px);
   position: relative;
   z-index: 5;
+  flex-shrink: 0;
 }
 
 /* Handwritten overlay text */
@@ -153,17 +166,18 @@ h1, h2, h3, h4, .font-serif {
   transform: translate(-50%, -50%) rotate(-3deg);
   
   font-family: 'Caveat', cursive;
-  font-size: clamp(1.8rem, 4vw, 3.5rem);
+  font-size: clamp(1.35rem, 3.2vw, 3.2rem);
   font-weight: 700;
   color: #ffffff;
   text-align: center;
   line-height: 1.2;
   
   text-shadow: 
-    2px 2px 0px rgba(0,0,0,0.3),
-    0 0 20px rgba(0,0,0,0.2);
+    2px 2px 0px rgba(0,0,0,0.35),
+    0 0 20px rgba(0,0,0,0.25);
   
   pointer-events: none;
   z-index: 10;
+  white-space: nowrap;
 }
 
