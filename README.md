@@ -1,6 +1,10 @@
 <p align="center">
   <a href="https://github.com/Fuhad-adeyanju09/Blaze">
-    <img src="./assets/logo.png" alt="Blaze - Pizza · Delivered" width="440" />
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="./assets/logo-dark.png">
+      <source media="(prefers-color-scheme: light)" srcset="./assets/logo-light.png">
+      <img alt="Blaze - Pizza · Delivered" src="./assets/logo-dark.png" width="460">
+    </picture>
   </a>
 </p>
 
@@ -206,12 +210,15 @@ The administrative portal (`/admin`) provides full visibility over restaurant op
 ```text
 Blaze/
 ├── assets/
-│   ├── logo.png                 # Official brand logo lockup (PIZZA · DELIVERED)
-│   └── logo-mark.png            # Precision brand squircle emblem
+│   ├── logo-dark.png            # Official brand logo for Dark Mode (white text)
+│   ├── logo-light.png           # Official brand logo for Light Mode (charcoal text)
+│   ├── logo.png                 # Fallback brand logo lockup
+│   └── logo-mark.png            # Precision brand squircle emblem (zero white corners)
 ├── client/                      # React 19 Frontend Application
 │   ├── public/
 │   │   ├── favicon.svg          # Minimalist brand favicon
-│   │   ├── logo.png             # Official brand logo
+│   │   ├── logo-dark.png        # Dark mode brand logo
+│   │   ├── logo-light.png       # Light mode brand logo
 │   │   └── logo-mark.png        # Brand emblem icon
 │   ├── src/
 │   │   ├── components/

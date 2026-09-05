@@ -27,7 +27,7 @@ export const AdminLayout: React.FC = () => {
       <aside className="w-full md:w-64 bg-[#111111] border-r border-[#222222] flex-shrink-0 flex flex-col justify-between p-6 text-white">
         <div className="space-y-8">
           <div>
-            <Logo size="sm" isLink={false} />
+            <Logo size="sm" isLink={false} darkText={false} />
             <div className="mt-2 inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/10 border border-white/15 text-[10px] font-medium tracking-widest text-neutral-300">
               <Shield className="w-3 h-3" />
               <span>Admin Portal</span>
