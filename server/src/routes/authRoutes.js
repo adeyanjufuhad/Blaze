@@ -95,8 +95,15 @@ router.get('/verify-email/:token', async (req, res, next) => {
       return res.status(400).json({ success: false, message: 'Link expired or invalid verification token' });
     }
 
+    if (user.isVerified) {
+      return res.json({
+        success: true,
+        alreadyVerified: true,
+        message: 'Your email is already verified! You can now log in.',
+      });
+    }
+
     user.isVerified = true;
-    user.verificationToken = null;
     await user.save();
 
     res.json({

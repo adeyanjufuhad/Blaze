@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { CheckCircle2, XCircle, ArrowRight, Loader2 } from 'lucide-react';
 import { Logo } from '../../components/ui/Logo';
@@ -8,9 +8,14 @@ export const VerifyEmail: React.FC = () => {
   const { token } = useParams<{ token: string }>();
   const [status, setStatus] = useState<'loading' | 'success' | 'error'>('loading');
   const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('Email verified!');
+  const hasRequestedRef = useRef(false);
 
   useEffect(() => {
     const verify = async () => {
+      if (hasRequestedRef.current) return;
+      hasRequestedRef.current = true;
+
       if (!token) {
         setStatus('error');
         setErrorMessage('Link expired or invalid.');
@@ -21,6 +26,9 @@ export const VerifyEmail: React.FC = () => {
         const res = await api.get(`/api/auth/verify-email/${token}`);
         if (res.data?.success) {
           setStatus('success');
+          if (res.data.message) {
+            setSuccessMessage(res.data.message);
+          }
         } else {
           setStatus('error');
           setErrorMessage(res.data?.message || 'Link expired or invalid.');
@@ -60,7 +68,7 @@ export const VerifyEmail: React.FC = () => {
             </div>
 
             <h2 className="font-serif text-2xl font-normal tracking-tight text-[#111111]">
-              Email verified!
+              {successMessage}
             </h2>
 
             <p className="text-xs text-[#666666]">
