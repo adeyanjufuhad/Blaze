@@ -8,9 +8,9 @@ import { MarqueeProductSection } from '../components/ui/MarqueeProductSection';
 import { Marquee } from '../components/ui/Marquee';
 import { Magnetic } from '../components/ui/Magnetic';
 import { TextScramble } from '../components/ui/TextScramble';
-import { ParallaxImage } from '../components/ui/ParallaxImage';
 import { AnimatedCounter } from '../components/ui/AnimatedCounter';
 import { MenuHero } from '../components/home/MenuHero';
+import { HeroPizzaShowcase } from '../components/home/HeroPizzaShowcase';
 import { Pizza } from '../types';
 import api from '../lib/api';
 
@@ -167,22 +167,9 @@ export const Home: React.FC = () => {
               </div>
             </div>
 
-            {/* Right Food Photo with Scroll Parallax */}
+            {/* Right Food Photo with Dynamic Showcase & Scroll Parallax */}
             <div className="lg:col-span-5 relative flex justify-center">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8 }}
-                className="relative w-full max-w-md aspect-square overflow-hidden rounded-3xl bg-[#f5f2ed] border border-[#e8e4dd] shadow-[0_15px_40px_rgba(0,0,0,0.06)]"
-              >
-                <ParallaxImage
-                  src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=1000&q=80"
-                  alt="Artisanal Wood-Fired Pizza"
-                  offset={40}
-                  rotateRange={2.5}
-                  imgClassName="oriente-img-hover"
-                />
-              </motion.div>
+              <HeroPizzaShowcase />
             </div>
           </div>
         </div>
